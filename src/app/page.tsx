@@ -158,8 +158,8 @@ export default function Home() {
                 Not your average hackathon.
               </h2>
               <p className="text-neutral-400 text-lg max-w-2xl mx-auto">
-                We've been to enough hackathons to know what sucks. 
-                So we built one that doesn't.
+                We&apos;ve been to enough hackathons to know what sucks. 
+                So we built one that doesn&apos;t.
               </p>
             </motion.div>
 
@@ -204,7 +204,7 @@ export default function Home() {
                   About InnoHack →
                 </h3>
                 <p className="text-sm text-neutral-400">
-                  What we're about, why we do this, and what makes us different.
+                  What we&apos;re about, why we do this, and what makes us different.
                 </p>
               </Link>
               <Link
@@ -257,7 +257,7 @@ export default function Home() {
                 Ready to build?
               </h2>
               <p className="text-neutral-400 mb-8">
-                Registration closes when we hit capacity. Don't wait.
+                Registration closes when we hit capacity. Don&apos;t wait.
               </p>
               <Link
                 href="/register"
