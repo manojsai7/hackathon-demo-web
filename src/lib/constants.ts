@@ -1,7 +1,7 @@
 export const HACKATHON_CONFIG = {
   name: "InnoHack 2026",
-  tagline: "Build the Future, One Line at a Time",
-  description: "Join 500+ innovators for 36 hours of coding, creativity, and collaboration",
+  tagline: "Engineered by professionals. Built by you.",
+  description: "Join 500+ innovators for 36 hours of coding, creativity, and collaboration—backed by professional hackathon teams",
   dates: {
     registration: {
       start: new Date("2026-01-15T00:00:00"),
@@ -128,7 +128,7 @@ export const PRIZES = [
     title: "Best Innovation",
     amount: 25000,
     perks: ["Innovation lab access", "Startup incubation support"],
-    color: "from-purple-400 to-purple-600",
+    color: "from-red-400 to-rose-600",
     icon: "💡",
   },
   {
@@ -136,7 +136,7 @@ export const PRIZES = [
     title: "Best UI/UX",
     amount: 25000,
     perks: ["Design tool subscriptions", "Portfolio review"],
-    color: "from-pink-400 to-pink-600",
+    color: "from-orange-400 to-amber-600",
     icon: "🎨",
   },
   {
@@ -144,7 +144,7 @@ export const PRIZES = [
     title: "People's Choice",
     amount: 25000,
     perks: ["Community recognition", "Social media feature"],
-    color: "from-blue-400 to-blue-600",
+    color: "from-rose-400 to-red-600",
     icon: "❤️",
   },
 ];

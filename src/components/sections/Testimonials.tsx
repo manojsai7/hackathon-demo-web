@@ -44,12 +44,12 @@ export default function Testimonials() {
           viewport={{ once: true }}
           className="mb-12 text-center"
         >
-          <span className="mb-4 inline-block rounded-full bg-pink-500/10 px-4 py-2 text-sm font-medium text-pink-400">
+          <span className="mb-4 inline-block rounded-full bg-primary-500/10 px-4 py-2 text-sm font-medium text-primary-400">
             What They Say
           </span>
           <h2 className="mb-6 text-4xl font-bold text-white md:text-5xl">
             Stories from past{" "}
-            <span className="bg-gradient-to-r from-pink-400 to-purple-400 bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-primary-400 to-accent-400 bg-clip-text text-transparent">
               innovators
             </span>
           </h2>

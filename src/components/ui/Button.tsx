@@ -35,15 +35,15 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
 
     const variants = {
       primary:
-        "bg-primary-500 text-white hover:bg-primary-600 focus:ring-primary-500 shadow-lg hover:shadow-xl hover:shadow-primary-500/25",
+        "bg-primary-600 text-white hover:bg-primary-500 focus:ring-primary-500 shadow-lg hover:shadow-xl hover:shadow-primary-500/30",
       secondary:
         "bg-dark-card dark:bg-dark-elevated text-white hover:bg-dark-elevated dark:hover:bg-dark-card focus:ring-dark-border border border-dark-border",
       outline:
-        "border-2 border-primary-500 text-primary-500 hover:bg-primary-500 hover:text-white focus:ring-primary-500",
+        "border-2 border-white/20 text-white hover:bg-white/5 focus:ring-primary-500",
       ghost:
         "text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-dark-card focus:ring-gray-300",
       gradient:
-        "bg-gradient-to-r from-primary-500 via-purple-500 to-accent-500 text-white hover:opacity-90 focus:ring-primary-500 shadow-lg hover:shadow-xl animate-gradient bg-[length:200%_200%]",
+        "bg-gradient-to-r from-primary-600 via-primary-500 to-accent-500 text-white hover:opacity-95 focus:ring-primary-500 shadow-lg hover:shadow-xl hover:shadow-primary-500/35 animate-gradient bg-[length:200%_200%]",
     };
 
     const sizes = {

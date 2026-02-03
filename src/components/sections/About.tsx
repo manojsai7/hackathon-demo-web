@@ -66,9 +66,9 @@ export default function About() {
           </h2>
           <p className="mx-auto max-w-3xl text-lg text-gray-400">
             InnoHack isn&apos;t your typical hackathon. It&apos;s a 36-hour journey where
-            creativity meets technology, where strangers become teammates, and
-            where crazy ideas turn into working prototypes. Are you ready to
-            push your limits?
+            creativity meets technology—backed by professional hackathon teams
+            and mentors who&apos;ve shipped real products. Are you ready to push
+            your limits?
           </p>
         </motion.div>
 

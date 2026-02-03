@@ -207,7 +207,7 @@ export default function Contact() {
             {/* Venue card */}
             <Card variant="glass" className="group">
               <div className="flex items-start gap-4">
-                <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-purple-500/10 text-purple-400">
+                <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-primary-500/10 text-primary-400">
                   <MapPin className="h-6 w-6" />
                 </div>
                 <div>

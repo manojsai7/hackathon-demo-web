@@ -39,7 +39,7 @@ export default function Hero() {
             y: [0, -30, 30, 0],
           }}
           transition={{ duration: 30, repeat: Infinity, ease: "linear" }}
-          className="absolute left-1/3 top-1/3 h-64 w-64 rounded-full bg-purple-500/15 blur-3xl"
+          className="absolute left-1/3 top-1/3 h-64 w-64 rounded-full bg-primary-500/15 blur-3xl"
         />
       </div>
 
@@ -47,8 +47,8 @@ export default function Hero() {
       <div
         className="absolute inset-0 opacity-20"
         style={{
-          backgroundImage: `linear-gradient(rgba(59, 130, 246, 0.1) 1px, transparent 1px),
-                           linear-gradient(90deg, rgba(59, 130, 246, 0.1) 1px, transparent 1px)`,
+          backgroundImage: `linear-gradient(rgba(220, 38, 38, 0.1) 1px, transparent 1px),
+                           linear-gradient(90deg, rgba(220, 38, 38, 0.1) 1px, transparent 1px)`,
           backgroundSize: "50px 50px",
         }}
       />
@@ -76,7 +76,7 @@ export default function Hero() {
           >
             Ready to build{" "}
             <span className="relative">
-              <span className="relative z-10 bg-gradient-to-r from-primary-400 via-purple-400 to-accent-400 bg-clip-text text-transparent">
+              <span className="relative z-10 bg-gradient-to-r from-primary-400 via-primary-500 to-accent-400 bg-clip-text text-transparent">
                 something incredible
               </span>
               <motion.span
@@ -96,8 +96,8 @@ export default function Hero() {
             transition={{ duration: 0.5, delay: 0.2 }}
             className="mx-auto mb-12 max-w-2xl text-lg text-gray-400 md:text-xl"
           >
-            {HACKATHON_CONFIG.description}. Join the biggest student hackathon
-            and turn your wildest ideas into reality.
+            {HACKATHON_CONFIG.description}. Designed with professional
+            hackathon teams so you can build with real-world rigor.
           </motion.p>
 
           {/* CTA Buttons */}
@@ -169,7 +169,7 @@ export default function Hero() {
             </div>
             <div className="h-1 w-1 rounded-full bg-gray-600" />
             <div className="flex items-center gap-2">
-              <Sparkles className="h-5 w-5 text-purple-500" />
+              <Sparkles className="h-5 w-5 text-accent-500" />
               <span>₹5 Lakhs+ in Prizes</span>
             </div>
           </motion.div>

@@ -13,7 +13,7 @@ export default function Prizes() {
       {/* Background elements */}
       <div className="absolute inset-0 overflow-hidden">
         <div className="absolute left-1/3 top-0 h-96 w-96 rounded-full bg-yellow-500/5 blur-3xl" />
-        <div className="absolute right-1/4 bottom-0 h-96 w-96 rounded-full bg-purple-500/5 blur-3xl" />
+        <div className="absolute right-1/4 bottom-0 h-96 w-96 rounded-full bg-primary-500/5 blur-3xl" />
       </div>
 
       <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">

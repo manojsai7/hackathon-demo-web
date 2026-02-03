@@ -27,7 +27,7 @@ export default function Sponsors() {
           <h2 className="mb-6 text-4xl font-bold text-white md:text-5xl">
             Backed by{" "}
             <span className="bg-gradient-to-r from-primary-400 to-accent-400 bg-clip-text text-transparent">
-              industry leaders
+              professional hackathon teams
             </span>
           </h2>
           <p className="mx-auto max-w-2xl text-lg text-gray-400">

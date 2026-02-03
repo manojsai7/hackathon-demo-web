@@ -58,7 +58,7 @@ export default function Timeline() {
         {/* Timeline */}
         <div className="relative">
           {/* Vertical line */}
-          <div className="absolute left-4 top-0 hidden h-full w-0.5 bg-gradient-to-b from-primary-500 via-purple-500 to-accent-500 md:left-1/2 md:block md:-translate-x-1/2" />
+          <div className="absolute left-4 top-0 hidden h-full w-0.5 bg-gradient-to-b from-primary-500 via-primary-600 to-accent-500 md:left-1/2 md:block md:-translate-x-1/2" />
 
           <div className="space-y-8">
             {TIMELINE.map((event, index) => {
