@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { Users, User, Code2, CheckCircle2, Loader2, ArrowRight, Zap } from "lucide-react";
+import { Users, User, CheckCircle2, Loader2, ArrowRight, Zap } from "lucide-react";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import { HACKATHON_CONFIG } from "@/lib/constants";
@@ -92,7 +92,7 @@ export default function RegisterPage() {
                 Your registration has been successfully submitted. Check your email for confirmation and further instructions.
               </p>
               <div className="p-4 bg-black/50 border border-terminal-green/20 font-mono text-xs text-left">
-                <div className="text-terminal-green/60">/// CONFIRMATION_ID</div>
+                <div className="text-terminal-green/60">{"/// CONFIRMATION_ID"}</div>
                 <div className="text-terminal-green mt-1">
                   #INH-{Math.random().toString(36).substr(2, 9).toUpperCase()}
                 </div>
@@ -213,7 +213,7 @@ export default function RegisterPage() {
                 {step === 1 && (
                   <>
                     <div className="text-xs font-mono text-terminal-green mb-4">
-                      /// PERSONAL_INFORMATION
+                      {"/// PERSONAL_INFORMATION"}
                     </div>
                     <div className="grid md:grid-cols-2 gap-4">
                       <div>
@@ -302,7 +302,7 @@ export default function RegisterPage() {
                     {regType === "team" ? (
                       <>
                         <div className="text-xs font-mono text-terminal-green mb-4">
-                          /// TEAM_CONFIGURATION
+                          {"/// TEAM_CONFIGURATION"}
                         </div>
                         <div className="space-y-4">
                           <div>
@@ -345,7 +345,7 @@ export default function RegisterPage() {
                     ) : (
                       <>
                         <div className="text-xs font-mono text-terminal-green mb-4">
-                          /// PREFERENCES
+                          {"/// PREFERENCES"}
                         </div>
                         <div className="space-y-4">
                           <div>
@@ -401,7 +401,7 @@ export default function RegisterPage() {
                 {step === 3 && (
                   <>
                     <div className="text-xs font-mono text-terminal-green mb-4">
-                      /// ADDITIONAL_INFO
+                      {"/// ADDITIONAL_INFO"}
                     </div>
                     <div className="grid md:grid-cols-2 gap-4">
                       <div>
@@ -455,7 +455,7 @@ export default function RegisterPage() {
                     {/* Summary */}
                     <div className="mt-6 p-4 bg-black/50 border border-terminal-green/20">
                       <div className="text-xs font-mono text-terminal-green mb-3">
-                        /// REGISTRATION_SUMMARY
+                        {"/// REGISTRATION_SUMMARY"}
                       </div>
                       <div className="space-y-2 text-xs font-mono">
                         <div className="flex justify-between">

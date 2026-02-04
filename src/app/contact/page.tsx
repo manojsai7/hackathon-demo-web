@@ -217,7 +217,7 @@ export default function ContactPage() {
                 {/* Social Links */}
                 <div className="terminal-card p-6">
                   <div className="text-xs font-mono text-terminal-green mb-4">
-                    /// SOCIAL_LINKS
+                    {"/// SOCIAL_LINKS"}
                   </div>
                   <div className="flex items-center gap-3">
                     {socials.map((social) => (

@@ -95,7 +95,7 @@ export default function Footer() {
             {/* Quick Links */}
             <div>
               <h3 className="text-xs font-mono text-terminal-green mb-4 tracking-wider">
-                /// QUICK_LINKS
+                {"/// QUICK_LINKS"}
               </h3>
               <ul className="space-y-2">
                 {quickLinks.map((link) => (
@@ -114,7 +114,7 @@ export default function Footer() {
             {/* Policies */}
             <div>
               <h3 className="text-xs font-mono text-terminal-green mb-4 tracking-wider">
-                /// POLICIES
+                {"/// POLICIES"}
               </h3>
               <ul className="space-y-2">
                 {policies.map((link) => (
@@ -133,7 +133,7 @@ export default function Footer() {
             {/* Contact */}
             <div>
               <h3 className="text-xs font-mono text-terminal-green mb-4 tracking-wider">
-                /// CONTACT
+                {"/// CONTACT"}
               </h3>
               <ul className="space-y-3">
                 <li className="flex items-start gap-2">

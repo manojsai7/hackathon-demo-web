@@ -164,7 +164,7 @@ export default function FAQPage() {
               >
                 <div className="flex items-center gap-3 mb-6">
                   <span className="text-xs font-mono text-terminal-green">
-                    /// {section.category}
+                    {`/// ${section.category}`}
                   </span>
                   <div className="flex-1 h-px bg-terminal-green/20" />
                 </div>

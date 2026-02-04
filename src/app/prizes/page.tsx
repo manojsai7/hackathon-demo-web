@@ -90,7 +90,7 @@ export default function PrizesPage() {
               className="text-center mb-12"
             >
               <span className="text-xs font-mono text-terminal-green tracking-widest">
-                /// GRAND_PRIZES
+                {"/// GRAND_PRIZES"}
               </span>
             </motion.div>
 
@@ -139,7 +139,7 @@ export default function PrizesPage() {
               className="text-center mb-12"
             >
               <span className="text-xs font-mono text-terminal-green tracking-widest">
-                /// TRACK_SPECIFIC_PRIZES
+                {"/// TRACK_SPECIFIC_PRIZES"}
               </span>
               <h2 className="mt-4 text-2xl md:text-4xl font-display font-bold text-white">
                 Best in <span className="text-terminal-green">Track</span>
@@ -175,7 +175,7 @@ export default function PrizesPage() {
               className="text-center mb-12"
             >
               <span className="text-xs font-mono text-terminal-green tracking-widest">
-                /// UNIVERSAL_REWARDS
+                {"/// UNIVERSAL_REWARDS"}
               </span>
               <h2 className="mt-4 text-2xl md:text-4xl font-display font-bold text-white">
                 For <span className="text-terminal-green">All Participants</span>

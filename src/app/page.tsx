@@ -329,7 +329,7 @@ export default function Home() {
             <div className="marquee-content">
               {Array.from({ length: 20 }).map((_, i) => (
                 <span key={i} className="mx-8 text-sm font-mono text-terminal-green/60">
-                  /// HACK · BUILD · DEPLOY ///
+                  {"/// HACK · BUILD · DEPLOY ///"}
                 </span>
               ))}
             </div>
@@ -372,7 +372,7 @@ export default function Home() {
               className="text-center mb-16"
             >
               <span className="text-xs font-mono text-terminal-green tracking-widest">
-                /// SYSTEM_MODULES
+                {"/// SYSTEM_MODULES"}
               </span>
               <h2 className="mt-4 text-3xl md:text-5xl font-display font-bold text-white">
                 Why <span className="text-terminal-green">Compete</span>?
@@ -418,7 +418,7 @@ export default function Home() {
               className="text-center mb-16"
             >
               <span className="text-xs font-mono text-terminal-green tracking-widest">
-                /// COMPETITION_TRACKS
+                {"/// COMPETITION_TRACKS"}
               </span>
               <h2 className="mt-4 text-3xl md:text-5xl font-display font-bold text-white">
                 Choose Your <span className="text-terminal-green">Battleground</span>

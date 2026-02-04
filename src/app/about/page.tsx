@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Users, Award, Code2, Cpu, Shield, Zap, Target, Brain } from "lucide-react";
+import { Users, Award, Code2, Target } from "lucide-react";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 
@@ -124,7 +124,7 @@ export default function AboutPage() {
               className="text-center mb-16"
             >
               <span className="text-xs font-mono text-terminal-green tracking-widest">
-                /// SYSTEM_FEATURES
+                {"/// SYSTEM_FEATURES"}
               </span>
               <h2 className="mt-4 text-3xl md:text-5xl font-display font-bold text-white">
                 Why <span className="text-terminal-green">INNOHACK</span>?
@@ -170,7 +170,7 @@ export default function AboutPage() {
               className="text-center mb-16"
             >
               <span className="text-xs font-mono text-terminal-green tracking-widest">
-                /// EVALUATION_METRICS
+                {"/// EVALUATION_METRICS"}
               </span>
               <h2 className="mt-4 text-3xl md:text-5xl font-display font-bold text-white">
                 Judging <span className="text-terminal-green">Criteria</span>
@@ -215,7 +215,7 @@ export default function AboutPage() {
               className="text-center mb-16"
             >
               <span className="text-xs font-mono text-terminal-green tracking-widest">
-                /// EXECUTION_TIMELINE
+                {"/// EXECUTION_TIMELINE"}
               </span>
               <h2 className="mt-4 text-3xl md:text-5xl font-display font-bold text-white">
                 Event <span className="text-terminal-green">Timeline</span>
