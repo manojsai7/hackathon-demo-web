@@ -1,148 +1,128 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Trophy, Award, Star, Gift, Zap, Cloud, Cpu } from "lucide-react";
+import { Trophy, Medal, Award, Gift, Zap, Cloud, Code2, Laptop } from "lucide-react";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 
 const mainPrizes = [
   {
-    place: "1st",
-    title: "Grand Champion",
-    prize: "₹2,00,000",
-    perks: ["Trophy", "Internship fast-track", "1-on-1 mentorship"],
-    color: "from-yellow-400 to-amber-500",
-    bgColor: "bg-amber-500/10",
-    borderColor: "border-amber-500/30",
+    rank: "01",
+    title: "FIRST_PLACE",
+    prize: "₹1,00,000",
+    icon: Trophy,
+    color: "terminal-amber",
+    perks: ["CASH_PRIZE", "INTERNSHIP_OFFERS", "PREMIUM_SWAG", "CLOUD_CREDITS"],
   },
   {
-    place: "2nd",
-    title: "First Runner-up",
-    prize: "₹1,25,000",
-    perks: ["Trophy", "Startup credits", "Mentorship session"],
-    color: "from-neutral-300 to-neutral-400",
-    bgColor: "bg-neutral-400/10",
-    borderColor: "border-neutral-400/30",
+    rank: "02",
+    title: "SECOND_PLACE",
+    prize: "₹60,000",
+    icon: Medal,
+    color: "terminal-green",
+    perks: ["CASH_PRIZE", "INTERVIEW_FAST_TRACK", "PREMIUM_SWAG"],
   },
   {
-    place: "3rd",
-    title: "Second Runner-up",
-    prize: "₹75,000",
-    perks: ["Trophy", "Cloud credits", "Swag kit"],
-    color: "from-orange-400 to-orange-600",
-    bgColor: "bg-orange-500/10",
-    borderColor: "border-orange-500/30",
+    rank: "03",
+    title: "THIRD_PLACE",
+    prize: "₹40,000",
+    icon: Award,
+    color: "terminal-cyan",
+    perks: ["CASH_PRIZE", "DEVELOPER_TOOLS", "PREMIUM_SWAG"],
   },
 ];
 
 const trackPrizes = [
-  {
-    track: "Best AI/ML Hack",
-    prize: "₹25,000",
-    icon: Cpu,
-    sponsor: "Powered by TensorFlow",
-  },
-  {
-    track: "Best Web3 Project",
-    prize: "₹25,000",
-    icon: Zap,
-    sponsor: "Sponsored by Polygon",
-  },
-  {
-    track: "Best Social Impact",
-    prize: "₹20,000",
-    icon: Star,
-    sponsor: "For projects that matter",
-  },
-  {
-    track: "Best UI/UX Design",
-    prize: "₹15,000",
-    icon: Award,
-    sponsor: "Figma credits included",
-  },
-  {
-    track: "Best Use of Cloud",
-    prize: "₹15,000",
-    icon: Cloud,
-    sponsor: "AWS/Azure credits",
-  },
-  {
-    track: "Best First-Timer Team",
-    prize: "₹10,000",
-    icon: Gift,
-    sponsor: "For hackathon newbies",
-  },
+  { track: "AI/ML", prize: "₹25,000", icon: Zap },
+  { track: "WEB3", prize: "₹25,000", icon: Code2 },
+  { track: "FINTECH", prize: "₹25,000", icon: Laptop },
+  { track: "HEALTHTECH", prize: "₹25,000", icon: Gift },
+  { track: "OPEN_INNOVATION", prize: "₹25,000", icon: Cloud },
 ];
 
-const perks = [
-  "Internship opportunities with sponsor companies",
-  "Cloud credits worth ₹50,000+",
-  "Premium swag for all participants",
-  "Networking with industry leaders",
-  "Certificate of participation",
-  "Lifetime bragging rights",
+const allParticipants = [
+  "FREE_MEALS_36HR",
+  "HACKATHON_SWAG_KIT",
+  "CERTIFICATE_OF_PARTICIPATION",
+  "NETWORKING_ACCESS",
+  "WORKSHOP_ACCESS",
+  "MENTOR_SESSIONS",
 ];
 
 export default function PrizesPage() {
   return (
     <>
       <Navbar />
-      <main className="min-h-screen pt-20">
+      <main className="min-h-screen pt-20 bg-hacker-bg">
         {/* Hero */}
         <section className="relative overflow-hidden py-20 lg:py-28">
-          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-amber-950/30 via-neutral-950 to-neutral-950" />
+          <div className="absolute inset-0 grid-pattern opacity-50" />
+          <div
+            className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px]"
+            style={{
+              background: "radial-gradient(ellipse, rgba(255, 176, 0, 0.1) 0%, transparent 70%)",
+            }}
+          />
           
           <div className="relative z-10 mx-auto max-w-5xl px-6 text-center">
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
-            >
-              <span className="inline-block mb-4 text-amber-400 font-mono text-sm tracking-wider uppercase">
-                Prizes
-              </span>
-              <h1 className="text-4xl md:text-6xl font-bold text-white mb-6">
-                ₹5 Lakhs+ up for grabs
+            <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }}>
+              <div className="protocol-box mx-auto mb-6 w-fit">
+                <span className="status-online" />
+                REWARD_ALLOCATION
+              </div>
+              <h1 className="text-4xl md:text-6xl lg:text-7xl font-display font-black text-white tracking-wider mb-6">
+                PRIZES & <span className="text-terminal-amber glow-text-subtle">REWARDS</span>
               </h1>
-              <p className="text-neutral-400 text-lg max-w-xl mx-auto">
-                We&apos;re not here to hand out participation trophies. Build something 
-                great, and you&apos;ll be rewarded.
+              <p className="text-gray-500 font-mono text-sm max-w-xl mx-auto">
+                Over ₹5 Lakhs in cash prizes, swag, and opportunities. Build something incredible.
               </p>
             </motion.div>
           </div>
         </section>
 
         {/* Main Prizes */}
-        <section className="py-16 lg:py-24">
+        <section className="py-16 border-t border-terminal-green/10">
           <div className="mx-auto max-w-6xl px-6">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="text-center mb-12"
+            >
+              <span className="text-xs font-mono text-terminal-green tracking-widest">
+                /// GRAND_PRIZES
+              </span>
+            </motion.div>
+
             <div className="grid md:grid-cols-3 gap-6">
-              {mainPrizes.map((prize, index) => (
+              {mainPrizes.map((prize, i) => (
                 <motion.div
-                  key={prize.place}
-                  initial={{ opacity: 0, y: 30 }}
+                  key={prize.rank}
+                  initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
-                  transition={{ delay: index * 0.15 }}
-                  className={`relative p-8 rounded-2xl ${prize.bgColor} border ${prize.borderColor} ${
-                    index === 0 ? "md:-mt-4 md:mb-4" : ""
-                  }`}
+                  transition={{ delay: i * 0.1 }}
+                  className={`terminal-card p-8 text-center border-${prize.color}/30 hover:border-${prize.color}/50 transition-colors`}
                 >
-                  <div className={`inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-gradient-to-br ${prize.color} mb-6`}>
-                    <Trophy className="w-8 h-8 text-white" />
+                  <div className={`inline-flex items-center justify-center w-16 h-16 border border-${prize.color}/30 bg-${prize.color}/10 mb-6`}>
+                    <prize.icon className={`w-8 h-8 text-${prize.color}`} />
                   </div>
-                  <div className="text-sm text-neutral-400 mb-1">{prize.place} Place</div>
-                  <h3 className="text-2xl font-bold text-white mb-2">{prize.title}</h3>
-                  <div className={`text-4xl font-bold bg-gradient-to-r ${prize.color} bg-clip-text text-transparent mb-6`}>
+                  <div className={`text-xs font-mono text-${prize.color} mb-2`}>
+                    RANK_{prize.rank}
+                  </div>
+                  <h3 className="text-lg font-mono font-bold text-white mb-4">
+                    {prize.title}
+                  </h3>
+                  <div className="text-3xl font-display font-black text-white mb-6">
                     {prize.prize}
                   </div>
-                  <ul className="space-y-2">
+                  <div className="space-y-2">
                     {prize.perks.map((perk) => (
-                      <li key={perk} className="flex items-center gap-2 text-neutral-400 text-sm">
-                        <Star className="w-4 h-4 text-amber-500" />
-                        {perk}
-                      </li>
+                      <div key={perk} className="text-[10px] font-mono text-gray-500">
+                        + {perk}
+                      </div>
                     ))}
-                  </ul>
+                  </div>
                 </motion.div>
               ))}
             </div>
@@ -150,69 +130,70 @@ export default function PrizesPage() {
         </section>
 
         {/* Track Prizes */}
-        <section className="py-16 lg:py-24 bg-neutral-900/30">
+        <section className="py-16 border-t border-terminal-green/10 bg-black">
           <div className="mx-auto max-w-6xl px-6">
             <motion.div
-              initial={{ opacity: 0 }}
-              whileInView={{ opacity: 1 }}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               className="text-center mb-12"
             >
-              <h2 className="text-3xl font-bold text-white mb-4">Track Prizes</h2>
-              <p className="text-neutral-400">
-                Special categories with dedicated prize pools
-              </p>
+              <span className="text-xs font-mono text-terminal-green tracking-widest">
+                /// TRACK_SPECIFIC_PRIZES
+              </span>
+              <h2 className="mt-4 text-2xl md:text-4xl font-display font-bold text-white">
+                Best in <span className="text-terminal-green">Track</span>
+              </h2>
             </motion.div>
 
-            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-              {trackPrizes.map((track, index) => (
+            <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
+              {trackPrizes.map((prize, i) => (
                 <motion.div
-                  key={track.track}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
+                  key={prize.track}
+                  initial={{ opacity: 0, scale: 0.9 }}
+                  whileInView={{ opacity: 1, scale: 1 }}
                   viewport={{ once: true }}
-                  transition={{ delay: index * 0.1 }}
-                  className="p-6 rounded-xl bg-neutral-900/50 border border-neutral-800 hover:border-neutral-700 transition-colors"
+                  transition={{ delay: i * 0.1 }}
+                  className="terminal-card p-6 text-center hover:border-terminal-green/40 transition-colors"
                 >
-                  <div className="w-12 h-12 rounded-xl bg-rose-500/10 flex items-center justify-center text-rose-400 mb-4">
-                    <track.icon className="w-6 h-6" />
-                  </div>
-                  <h3 className="text-lg font-semibold text-white mb-1">{track.track}</h3>
-                  <div className="text-2xl font-bold text-rose-400 mb-2">{track.prize}</div>
-                  <p className="text-neutral-500 text-sm">{track.sponsor}</p>
+                  <prize.icon className="w-6 h-6 mx-auto mb-4 text-terminal-green" />
+                  <div className="text-[10px] font-mono text-gray-500 mb-2">{prize.track}</div>
+                  <div className="text-lg font-display font-bold text-white">{prize.prize}</div>
                 </motion.div>
               ))}
             </div>
           </div>
         </section>
 
-        {/* Additional Perks */}
-        <section className="py-16 lg:py-24">
+        {/* All Participants */}
+        <section className="py-16 border-t border-terminal-green/10">
           <div className="mx-auto max-w-4xl px-6">
             <motion.div
-              initial={{ opacity: 0 }}
-              whileInView={{ opacity: 1 }}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               className="text-center mb-12"
             >
-              <h2 className="text-3xl font-bold text-white mb-4">Everyone Wins Something</h2>
-              <p className="text-neutral-400">
-                Just for showing up and building. Seriously.
-              </p>
+              <span className="text-xs font-mono text-terminal-green tracking-widest">
+                /// UNIVERSAL_REWARDS
+              </span>
+              <h2 className="mt-4 text-2xl md:text-4xl font-display font-bold text-white">
+                For <span className="text-terminal-green">All Participants</span>
+              </h2>
             </motion.div>
 
-            <div className="grid sm:grid-cols-2 gap-4">
-              {perks.map((perk, index) => (
+            <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
+              {allParticipants.map((perk, i) => (
                 <motion.div
                   key={perk}
-                  initial={{ opacity: 0, x: index % 2 === 0 ? -20 : 20 }}
-                  whileInView={{ opacity: 1, x: 0 }}
+                  initial={{ opacity: 0, y: 10 }}
+                  whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
-                  transition={{ delay: index * 0.1 }}
-                  className="flex items-center gap-3 p-4 rounded-xl bg-neutral-900/30 border border-neutral-800"
+                  transition={{ delay: i * 0.05 }}
+                  className="flex items-center gap-3 p-4 border border-terminal-green/10 bg-hacker-card"
                 >
-                  <Gift className="w-5 h-5 text-orange-400 flex-shrink-0" />
-                  <span className="text-neutral-300">{perk}</span>
+                  <span className="text-terminal-green">✓</span>
+                  <span className="text-xs font-mono text-gray-400">{perk}</span>
                 </motion.div>
               ))}
             </div>

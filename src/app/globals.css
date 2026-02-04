@@ -2,84 +2,217 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --background: #0a0a0a;
-  --foreground: #fafafa;
-}
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600;700;800&family=Orbitron:wght@400;500;600;700;800;900&display=swap');
 
 @layer base {
+  :root {
+    --terminal-green: #00ff00;
+    --terminal-red: #ff0033;
+    --terminal-amber: #ffb000;
+    --terminal-cyan: #00ffff;
+    --hacker-bg: #0a0a0a;
+  }
+
+  * {
+    cursor: default;
+  }
+
+  a, button {
+    cursor: pointer;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
   body {
-    @apply bg-neutral-950 text-neutral-100 antialiased;
-    font-family: var(--font-body), system-ui, sans-serif;
+    @apply bg-hacker-bg text-white antialiased min-h-screen font-mono;
+    background-image: 
+      radial-gradient(ellipse at top, rgba(0, 255, 0, 0.03) 0%, transparent 50%),
+      radial-gradient(ellipse at bottom, rgba(255, 0, 51, 0.02) 0%, transparent 50%);
   }
 
-  h1, h2, h3, h4, h5, h6 {
-    font-family: var(--font-heading), system-ui, sans-serif;
-    @apply tracking-tight font-semibold;
+  /* Terminal-style selection */
+  ::selection {
+    @apply bg-terminal-green text-black;
+  }
+
+  /* Custom scrollbar - terminal style */
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+
+  ::-webkit-scrollbar-track {
+    @apply bg-hacker-bg;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    @apply bg-terminal-green/30;
+    border: 1px solid rgba(0, 255, 0, 0.2);
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    @apply bg-terminal-green/50;
   }
 }
 
-* {
-  scroll-behavior: smooth;
-}
+@layer components {
+  /* Terminal card style */
+  .terminal-card {
+    @apply bg-hacker-card border border-terminal-green/20 relative overflow-hidden;
+    box-shadow: 
+      0 0 0 1px rgba(0, 255, 0, 0.05),
+      inset 0 1px 0 rgba(0, 255, 0, 0.1),
+      0 0 40px rgba(0, 255, 0, 0.03);
+  }
 
-body {
-  color: var(--foreground);
-  background: var(--background);
-}
+  .terminal-card::before {
+    content: '';
+    @apply absolute inset-0 pointer-events-none;
+    background: linear-gradient(
+      180deg,
+      rgba(0, 255, 0, 0.03) 0%,
+      transparent 50%
+    );
+  }
 
-/* Minimal scrollbar */
-::-webkit-scrollbar {
-  width: 8px;
-}
+  /* Glowing text */
+  .glow-text {
+    text-shadow: 
+      0 0 10px currentColor,
+      0 0 20px currentColor,
+      0 0 40px currentColor;
+  }
 
-::-webkit-scrollbar-track {
-  background: #0a0a0a;
-}
+  .glow-text-subtle {
+    text-shadow: 0 0 10px currentColor;
+  }
 
-::-webkit-scrollbar-thumb {
-  background: #333;
-  border-radius: 4px;
-}
+  /* Terminal header bar */
+  .terminal-header {
+    @apply flex items-center gap-2 px-4 py-2 bg-hacker-bg border-b border-terminal-green/20;
+  }
 
-::-webkit-scrollbar-thumb:hover {
-  background: #444;
-}
+  .terminal-dot {
+    @apply w-3 h-3 rounded-full;
+  }
 
-/* Selection */
-::selection {
-  background: rgba(244, 63, 94, 0.3);
-  color: #fff;
-}
+  /* Scan line effect */
+  .scan-lines {
+    @apply pointer-events-none fixed inset-0 z-50;
+    background: repeating-linear-gradient(
+      0deg,
+      rgba(0, 0, 0, 0.1),
+      rgba(0, 0, 0, 0.1) 1px,
+      transparent 1px,
+      transparent 2px
+    );
+  }
 
-/* Focus visible for accessibility */
-:focus-visible {
-  outline: 2px solid #f43f5e;
-  outline-offset: 2px;
+  /* Binary rain container */
+  .binary-rain {
+    @apply absolute inset-0 overflow-hidden pointer-events-none opacity-20;
+  }
+
+  .binary-column {
+    @apply absolute text-terminal-green text-xs font-mono leading-none;
+    animation: matrix 20s linear infinite;
+    text-shadow: 0 0 10px currentColor;
+  }
+
+  /* Typing effect */
+  .typing-text {
+    @apply overflow-hidden whitespace-nowrap border-r-2 border-terminal-green;
+    animation: typing 3.5s steps(40, end), blink 0.75s step-end infinite;
+  }
+
+  /* Grid pattern overlay */
+  .grid-pattern {
+    background-image: 
+      linear-gradient(rgba(0, 255, 0, 0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0, 255, 0, 0.03) 1px, transparent 1px);
+    background-size: 50px 50px;
+  }
+
+  /* Marquee */
+  .marquee-container {
+    @apply overflow-hidden whitespace-nowrap;
+  }
+
+  .marquee-content {
+    @apply inline-flex animate-scroll-x;
+  }
+
+  /* Glitch effect */
+  .glitch {
+    @apply relative;
+  }
+
+  .glitch::before,
+  .glitch::after {
+    content: attr(data-text);
+    @apply absolute top-0 left-0 w-full h-full;
+  }
+
+  .glitch::before {
+    animation: glitch-1 2s infinite linear alternate-reverse;
+    clip-path: polygon(0 0, 100% 0, 100% 35%, 0 35%);
+    @apply text-terminal-cyan;
+  }
+
+  .glitch::after {
+    animation: glitch-2 3s infinite linear alternate-reverse;
+    clip-path: polygon(0 65%, 100% 65%, 100% 100%, 0 100%);
+    @apply text-terminal-red;
+  }
+
+  /* Protocol box */
+  .protocol-box {
+    @apply inline-flex items-center gap-2 px-3 py-1 text-xs font-mono uppercase tracking-widest;
+    @apply border border-terminal-green/30 bg-terminal-green/5 text-terminal-green;
+  }
+
+  /* Status indicator */
+  .status-online {
+    @apply w-2 h-2 bg-terminal-green rounded-full;
+    box-shadow: 0 0 10px currentColor;
+    animation: glow-pulse 2s ease-in-out infinite;
+  }
+
+  .status-processing {
+    @apply w-2 h-2 bg-terminal-amber rounded-full;
+    box-shadow: 0 0 10px currentColor;
+    animation: glow-pulse 1s ease-in-out infinite;
+  }
 }
 
 @layer utilities {
-  .text-balance {
-    text-wrap: balance;
+  .text-gradient-terminal {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-terminal-green via-terminal-cyan to-terminal-green;
   }
-  
-  .font-heading {
-    font-family: var(--font-heading), system-ui, sans-serif;
+
+  .border-glow-green {
+    box-shadow: 0 0 10px rgba(0, 255, 0, 0.2), inset 0 0 10px rgba(0, 255, 0, 0.05);
   }
-  
-  .font-mono {
-    font-family: var(--font-mono), ui-monospace, monospace;
+
+  .border-glow-red {
+    box-shadow: 0 0 10px rgba(255, 0, 51, 0.2), inset 0 0 10px rgba(255, 0, 51, 0.05);
   }
 }
 
-/* Reduce motion for accessibility */
-@media (prefers-reduced-motion: reduce) {
-  *,
-  *::before,
-  *::after {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
-    scroll-behavior: auto !important;
-  }
+@keyframes glitch-1 {
+  0%, 100% { transform: translateX(0); }
+  20% { transform: translateX(-2px); }
+  40% { transform: translateX(2px); }
+  60% { transform: translateX(-1px); }
+  80% { transform: translateX(1px); }
+}
+
+@keyframes glitch-2 {
+  0%, 100% { transform: translateX(0); }
+  20% { transform: translateX(2px); }
+  40% { transform: translateX(-2px); }
+  60% { transform: translateX(1px); }
+  80% { transform: translateX(-1px); }
 }

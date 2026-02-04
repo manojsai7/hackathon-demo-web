@@ -7,7 +7,7 @@ import { motion, MotionProps } from "framer-motion";
 type MotionButtonProps = MotionProps & React.ComponentPropsWithoutRef<"button">;
 
 interface ButtonProps extends Omit<MotionButtonProps, "children"> {
-  variant?: "primary" | "secondary" | "outline" | "ghost" | "gradient";
+  variant?: "primary" | "secondary" | "outline" | "ghost" | "danger";
   size?: "sm" | "md" | "lg" | "xl";
   isLoading?: boolean;
   leftIcon?: ReactNode;
@@ -31,26 +31,26 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
     ref
   ) => {
     const baseStyles =
-      "relative inline-flex items-center justify-center font-semibold rounded-xl transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed overflow-hidden";
+      "relative inline-flex items-center justify-center font-mono font-bold uppercase tracking-wider transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-hacker-bg disabled:opacity-50 disabled:cursor-not-allowed overflow-hidden";
 
     const variants = {
       primary:
-        "bg-primary-600 text-white hover:bg-primary-500 focus:ring-primary-500 shadow-lg hover:shadow-xl hover:shadow-primary-500/30",
+        "bg-terminal-green text-black hover:bg-terminal-green/90 focus:ring-terminal-green/50 shadow-glow-green",
       secondary:
-        "bg-dark-card dark:bg-dark-elevated text-white hover:bg-dark-elevated dark:hover:bg-dark-card focus:ring-dark-border border border-dark-border",
+        "bg-hacker-card text-white border border-terminal-green/20 hover:border-terminal-green/50 hover:bg-terminal-green/10 focus:ring-terminal-green/30",
       outline:
-        "border-2 border-white/20 text-white hover:bg-white/5 focus:ring-primary-500",
+        "border border-terminal-green/30 text-terminal-green hover:bg-terminal-green/10 focus:ring-terminal-green/30",
       ghost:
-        "text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-dark-card focus:ring-gray-300",
-      gradient:
-        "bg-gradient-to-r from-primary-600 via-primary-500 to-accent-500 text-white hover:opacity-95 focus:ring-primary-500 shadow-lg hover:shadow-xl hover:shadow-primary-500/35 animate-gradient bg-[length:200%_200%]",
+        "text-gray-400 hover:text-terminal-green hover:bg-terminal-green/5 focus:ring-terminal-green/30",
+      danger:
+        "bg-terminal-red text-white hover:bg-terminal-red/90 focus:ring-terminal-red/50 shadow-glow-red",
     };
 
     const sizes = {
-      sm: "px-4 py-2 text-sm gap-1.5",
-      md: "px-6 py-2.5 text-base gap-2",
-      lg: "px-8 py-3 text-lg gap-2.5",
-      xl: "px-10 py-4 text-xl gap-3",
+      sm: "px-4 py-2 text-xs gap-1.5",
+      md: "px-6 py-2.5 text-sm gap-2",
+      lg: "px-8 py-3 text-sm gap-2.5",
+      xl: "px-10 py-4 text-base gap-3",
     };
 
     return (
@@ -62,16 +62,16 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
         whileTap={{ scale: disabled || isLoading ? 1 : 0.98 }}
         {...props}
       >
-        {/* Ripple effect background */}
-        <span className="absolute inset-0 overflow-hidden rounded-xl">
-          <span className="absolute inset-0 rounded-xl bg-white/20 opacity-0 transition-opacity group-hover:opacity-100" />
+        {/* Shine effect */}
+        <span className="absolute inset-0 overflow-hidden">
+          <span className="absolute inset-0 bg-white/10 opacity-0 transition-opacity group-hover:opacity-100" />
         </span>
 
         {/* Content */}
         <span className="relative flex items-center justify-center gap-2">
           {isLoading ? (
             <svg
-              className="h-5 w-5 animate-spin"
+              className="h-4 w-4 animate-spin"
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
               viewBox="0 0 24 24"
@@ -91,10 +91,12 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
               />
             </svg>
           ) : (
-            leftIcon
+            <>
+              {leftIcon && <span className="shrink-0">{leftIcon}</span>}
+              {children}
+              {rightIcon && <span className="shrink-0">{rightIcon}</span>}
+            </>
           )}
-          {children}
-          {!isLoading && rightIcon}
         </span>
       </motion.button>
     );
