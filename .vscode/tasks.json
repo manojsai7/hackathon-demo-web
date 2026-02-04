@@ -1,0 +1,19 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"label": "git-rebase-continue",
+			"type": "shell",
+			"command": "git",
+			"args": [
+				"-c",
+				"core.editor=true",
+				"-c",
+				"core.pager=cat",
+				"rebase",
+				"--continue"
+			],
+			"isBackground": false
+		}
+	]
+}
