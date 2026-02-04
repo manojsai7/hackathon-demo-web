@@ -1,25 +1,88 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef, useMemo } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { ArrowRight, Code2, Users, Trophy, Rocket, ChevronDown, Sparkles, Calendar, MapPin, Clock } from "lucide-react";
 import Link from "next/link";
-import Button from "@/components/ui/Button";
+import { 
+  Terminal, 
+  ChevronDown, 
+  ExternalLink,
+  Users,
+  Trophy,
+  Clock,
+  Zap,
+  Code2,
+  Shield,
+  Cpu,
+  Database
+} from "lucide-react";
+import Navbar from "@/components/layout/Navbar";
+import Footer from "@/components/layout/Footer";
 import { HACKATHON_CONFIG } from "@/lib/constants";
 
-// Intro Animation Component
-function IntroAnimation({ onComplete }: { onComplete: () => void }) {
-  const [phase, setPhase] = useState(0);
+// Binary Rain Component
+function BinaryRain() {
+  const columns = 30;
+  const [binaryColumns, setBinaryColumns] = useState<
+    { id: number; left: string; delay: number; duration: number; content: string }[]
+  >([]);
 
   useEffect(() => {
-    const timers = [
-      setTimeout(() => setPhase(1), 500),
-      setTimeout(() => setPhase(2), 1500),
-      setTimeout(() => setPhase(3), 2500),
-      setTimeout(() => onComplete(), 3500),
-    ];
-    return () => timers.forEach(clearTimeout);
-  }, [onComplete]);
+    const nextColumns = Array.from({ length: columns }, (_, i) => ({
+      id: i,
+      left: `${(i / columns) * 100}%`,
+      delay: Math.random() * 20,
+      duration: 15 + Math.random() * 10,
+      content: Array.from({ length: 50 }, () => (Math.random() > 0.5 ? "1" : "0")).join("\n"),
+    }));
+    setBinaryColumns(nextColumns);
+  }, [columns]);
+
+  return (
+    <div className="binary-rain">
+      {binaryColumns.map((col) => (
+        <div
+          key={col.id}
+          className="binary-column"
+          style={{
+            left: col.left,
+            animationDelay: `${col.delay}s`,
+            animationDuration: `${col.duration}s`,
+          }}
+        >
+          {col.content}
+        </div>
+      ))}
+    </div>
+  );
+}
+
+// Terminal Intro Animation
+function TerminalIntro({ onComplete }: { onComplete: () => void }) {
+  const [lines, setLines] = useState<string[]>([]);
+  const [currentLine, setCurrentLine] = useState(0);
+  
+  const terminalLines = useMemo(() => [
+    "> ESTABLISHING_CONNECTION...",
+    "> PROTOCOL: INNOHACK_2K26",
+    "> STATUS: ONLINE",
+    "> LOADING_HACKATHON_INTERFACE...",
+    "> WELCOME_HACKER",
+    "> INITIALIZATION_COMPLETE",
+  ], []);
+
+  useEffect(() => {
+    if (currentLine < terminalLines.length) {
+      const timer = setTimeout(() => {
+        setLines(prev => [...prev, terminalLines[currentLine]]);
+        setCurrentLine(prev => prev + 1);
+      }, 400);
+      return () => clearTimeout(timer);
+    } else {
+      const timer = setTimeout(onComplete, 800);
+      return () => clearTimeout(timer);
+    }
+  }, [currentLine, terminalLines, onComplete]);
 
   return (
     <motion.div
@@ -27,65 +90,31 @@ function IntroAnimation({ onComplete }: { onComplete: () => void }) {
       exit={{ opacity: 0 }}
       transition={{ duration: 0.5 }}
     >
-      <div className="relative flex flex-col items-center">
-        {/* Glowing background effect */}
-        <motion.div
-          className="absolute h-64 w-64 rounded-full bg-primary-600/30 blur-3xl"
-          animate={{
-            scale: [1, 1.5, 1],
-            opacity: [0.3, 0.6, 0.3],
-          }}
-          transition={{ duration: 2, repeat: Infinity }}
-        />
-        
-        {/* Logo animation */}
-        <motion.div
-          initial={{ scale: 0, rotate: -180 }}
-          animate={{ scale: phase >= 1 ? 1 : 0, rotate: phase >= 1 ? 0 : -180 }}
-          transition={{ type: "spring", damping: 15 }}
-          className="relative z-10 mb-8"
-        >
-          <div className="flex h-24 w-24 items-center justify-center bg-primary-600">
-            <Code2 className="h-12 w-12 text-white" />
+      <div className="w-full max-w-2xl mx-4">
+        <div className="terminal-card">
+          {/* Terminal Header */}
+          <div className="terminal-header">
+            <div className="terminal-dot bg-terminal-red" />
+            <div className="terminal-dot bg-terminal-amber" />
+            <div className="terminal-dot bg-terminal-green" />
+            <span className="ml-4 text-xs font-mono text-gray-500">terminal@innohack:~</span>
           </div>
-          <motion.div
-            className="absolute inset-0 bg-primary-600"
-            animate={{ opacity: [0.5, 1, 0.5] }}
-            transition={{ duration: 1, repeat: Infinity }}
-            style={{ filter: "blur(20px)" }}
-          />
-        </motion.div>
-
-        {/* Text animations */}
-        <motion.h1
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: phase >= 2 ? 1 : 0, y: phase >= 2 ? 0 : 20 }}
-          className="mb-2 text-4xl font-black uppercase tracking-wider text-white md:text-6xl"
-        >
-          {HACKATHON_CONFIG.name}
-        </motion.h1>
-        
-        <motion.p
-          initial={{ opacity: 0 }}
-          animate={{ opacity: phase >= 3 ? 1 : 0 }}
-          className="font-mono text-lg text-primary-500"
-        >
-          LOADING INNOVATION...
-        </motion.p>
-
-        {/* Progress bar */}
-        <motion.div
-          className="mt-8 h-1 w-48 overflow-hidden bg-zinc-800"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-        >
-          <motion.div
-            className="h-full bg-primary-600"
-            initial={{ width: "0%" }}
-            animate={{ width: "100%" }}
-            transition={{ duration: 3, ease: "easeInOut" }}
-          />
-        </motion.div>
+          
+          {/* Terminal Content */}
+          <div className="p-6 font-mono text-sm">
+            {lines.map((line, i) => (
+              <motion.div
+                key={i}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                className={`mb-2 ${line.includes("COMPLETE") ? "text-terminal-green" : "text-gray-400"}`}
+              >
+                {line}
+              </motion.div>
+            ))}
+            <span className="inline-block w-2 h-4 bg-terminal-green animate-blink" />
+          </div>
+        </div>
       </div>
     </motion.div>
   );
@@ -93,51 +122,51 @@ function IntroAnimation({ onComplete }: { onComplete: () => void }) {
 
 // Stats data
 const stats = [
-  { label: "Participants", value: "500+", icon: Users },
-  { label: "In Prizes", value: "₹5L+", icon: Trophy },
-  { label: "Hours", value: "36", icon: Clock },
-  { label: "Tracks", value: "5", icon: Rocket },
+  { value: "500+", label: "HACKERS_DEPLOYED", icon: Users },
+  { value: "₹5L+", label: "PRIZE_POOL", icon: Trophy },
+  { value: "36", label: "HOURS_RUNTIME", icon: Clock },
+  { value: "50+", label: "MENTORS_ONLINE", icon: Zap },
 ];
 
-// Features data
+// Features
 const features = [
   {
     icon: Code2,
-    title: "Build & Learn",
-    description: "Work on real-world problems with cutting-edge technologies",
+    title: "BUILD_DEPLOY",
+    description: "Transform your ideas into working prototypes in 36 hours",
   },
   {
-    icon: Users,
-    title: "Network",
-    description: "Connect with like-minded developers and industry mentors",
+    icon: Shield,
+    title: "INDUSTRY_MENTORSHIP",
+    description: "Get guidance from engineering leaders at top tech companies",
   },
   {
-    icon: Trophy,
-    title: "Win Big",
-    description: "Compete for prizes worth over ₹5 Lakhs",
+    icon: Cpu,
+    title: "PREMIUM_RESOURCES",
+    description: "Access cloud credits, APIs, and developer tools worth lakhs",
   },
   {
-    icon: Rocket,
-    title: "Launch",
-    description: "Turn your hackathon project into a real startup",
+    icon: Database,
+    title: "CAREER_LAUNCHPAD",
+    description: "Top performers get direct interview opportunities",
   },
 ];
 
-// Tracks data
+// Tracks
 const tracks = [
-  { name: "AI/ML", color: "from-blue-600 to-cyan-600" },
-  { name: "Web3", color: "from-purple-600 to-pink-600" },
-  { name: "FinTech", color: "from-green-600 to-emerald-600" },
-  { name: "HealthTech", color: "from-red-600 to-orange-600" },
-  { name: "Open Innovation", color: "from-yellow-600 to-amber-600" },
+  { name: "AI/ML", code: "0x01", color: "text-terminal-cyan" },
+  { name: "WEB3", code: "0x02", color: "text-terminal-purple" },
+  { name: "FINTECH", code: "0x03", color: "text-terminal-green" },
+  { name: "HEALTHTECH", code: "0x04", color: "text-terminal-red" },
+  { name: "OPEN_INNOVATION", code: "0x05", color: "text-terminal-amber" },
 ];
 
 export default function Home() {
   const [showIntro, setShowIntro] = useState(true);
   const [introComplete, setIntroComplete] = useState(false);
+  const heroRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    // Check if user has seen intro in this session
     const hasSeenIntro = sessionStorage.getItem("hasSeenIntro");
     if (hasSeenIntro) {
       setShowIntro(false);
@@ -153,143 +182,178 @@ export default function Home() {
 
   return (
     <>
-      {/* Intro Animation */}
+      {/* Terminal Intro */}
       <AnimatePresence>
         {showIntro && !introComplete && (
-          <IntroAnimation onComplete={handleIntroComplete} />
+          <TerminalIntro onComplete={handleIntroComplete} />
         )}
       </AnimatePresence>
 
-      <main className="bg-black">
-        {/* Hero Section */}
-        <section className="relative min-h-screen overflow-hidden">
-          {/* Background effects */}
-          <div className="absolute inset-0">
-            <div className="absolute inset-0 bg-gradient-to-br from-black via-zinc-900/50 to-black" />
-            <motion.div
-              animate={{ x: [0, 30, 0], y: [0, -30, 0] }}
-              transition={{ duration: 20, repeat: Infinity }}
-              className="absolute -left-40 top-20 h-96 w-96 rounded-full bg-primary-600/20 blur-3xl"
-            />
-            <motion.div
-              animate={{ x: [0, -30, 0], y: [0, 30, 0] }}
-              transition={{ duration: 25, repeat: Infinity }}
-              className="absolute -right-40 bottom-20 h-96 w-96 rounded-full bg-accent-600/20 blur-3xl"
-            />
-          </div>
+      <Navbar />
 
-          {/* Grid pattern */}
-          <div
-            className="absolute inset-0 opacity-20"
+      <main className="bg-hacker-bg">
+        {/* Hero Section */}
+        <section ref={heroRef} className="relative min-h-screen overflow-hidden">
+          {/* Binary Rain Background */}
+          <BinaryRain />
+          
+          {/* Grid Pattern */}
+          <div className="absolute inset-0 grid-pattern" />
+          
+          {/* Gradient overlays */}
+          <div className="absolute inset-0 bg-gradient-to-b from-transparent via-hacker-bg/50 to-hacker-bg" />
+          <div 
+            className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[600px]"
             style={{
-              backgroundImage: `linear-gradient(rgba(220, 38, 38, 0.1) 1px, transparent 1px),
-                               linear-gradient(90deg, rgba(220, 38, 38, 0.1) 1px, transparent 1px)`,
-              backgroundSize: "50px 50px",
+              background: "radial-gradient(ellipse, rgba(0, 255, 0, 0.08) 0%, transparent 60%)",
             }}
           />
 
           {/* Content */}
           <div className="relative z-10 flex min-h-screen flex-col items-center justify-center px-4 py-20">
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: introComplete ? 1 : 0, y: introComplete ? 0 : 20 }}
-              transition={{ delay: 0.2 }}
-              className="mx-auto max-w-6xl text-center"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: introComplete ? 1 : 0 }}
+              transition={{ duration: 0.5 }}
+              className="mx-auto max-w-5xl text-center"
             >
-              {/* Badge */}
-              <div className="mb-8 inline-flex items-center gap-2 border border-primary-600/30 bg-primary-600/10 px-4 py-2 text-sm font-mono text-primary-400">
-                <Sparkles className="h-4 w-4" />
-                <span>March 15-16, 2026 • 36 Hours of Innovation</span>
-              </div>
+              {/* Protocol Badge */}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.1 }}
+                className="protocol-box mx-auto mb-8"
+              >
+                <span className="status-online" />
+                PROTOCOL_V2.0.26
+              </motion.div>
 
-              {/* Main heading */}
-              <h1 className="mb-6 text-5xl font-black uppercase leading-tight tracking-wider text-white md:text-7xl lg:text-8xl">
-                Ready to build{" "}
-                <span className="bg-gradient-to-r from-primary-500 via-primary-400 to-accent-500 bg-clip-text text-transparent">
-                  something incredible
-                </span>
-                ?
-              </h1>
+              {/* Main Title */}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.2 }}
+                className="mb-6"
+              >
+                <h1 className="text-5xl md:text-7xl lg:text-8xl font-display font-black text-white tracking-wider mb-2">
+                  <span className="text-terminal-green glow-text-subtle">INNO</span>HACK
+                </h1>
+                <div className="flex items-center justify-center gap-4 text-sm font-mono text-gray-500">
+                  <span>2K26</span>
+                  <span className="w-1 h-1 bg-terminal-green rounded-full" />
+                  <span>&lt; NATIONAL_LEVEL_24HR_HACKATHON /&gt;</span>
+                </div>
+              </motion.div>
 
               {/* Tagline */}
-              <p className="mx-auto mb-12 max-w-2xl text-lg font-mono text-gray-400 md:text-xl">
-                {HACKATHON_CONFIG.description}. Join the biggest student hackathon
-                and turn your wildest ideas into reality.
-              </p>
+              <motion.p
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.3 }}
+                className="mx-auto mb-10 max-w-xl text-sm md:text-base font-mono text-gray-400 leading-relaxed"
+              >
+                {HACKATHON_CONFIG.description}. Join 500+ developers for 36 hours of creation, collaboration, and code.
+              </motion.p>
 
               {/* CTA Buttons */}
-              <div className="mb-16 flex flex-col items-center justify-center gap-4 sm:flex-row">
-                <Link href="/register">
-                  <Button
-                    variant="gradient"
-                    size="xl"
-                    rightIcon={<ArrowRight className="h-5 w-5" />}
-                  >
-                    Count me in!
-                  </Button>
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.4 }}
+                className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-12"
+              >
+                <Link
+                  href="/register"
+                  className="group relative px-8 py-3 bg-terminal-green text-black font-mono font-bold text-sm tracking-wider overflow-hidden"
+                >
+                  <span className="relative z-10 flex items-center gap-2">
+                    INITIALIZE_REGISTRATION
+                    <ExternalLink className="w-4 h-4" />
+                  </span>
+                  <div className="absolute inset-0 bg-white/20 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-500" />
                 </Link>
-                <Link href="/about">
-                  <Button variant="outline" size="xl">
-                    Learn more
-                  </Button>
+                <Link
+                  href="/about"
+                  className="px-8 py-3 border border-terminal-green/30 text-terminal-green font-mono text-sm tracking-wider hover:bg-terminal-green/10 transition-colors"
+                >
+                  VIEW_DOCUMENTATION
                 </Link>
-              </div>
+              </motion.div>
 
-              {/* Event info */}
-              <div className="flex flex-wrap items-center justify-center gap-6 text-sm text-neutral-300">
-                <div className="flex items-center gap-2">
-                  <Calendar className="h-5 w-5 text-primary-500" />
-                  <span>March 15-16, 2026</span>
-                </div>
-                <div className="h-1 w-1 rounded-full bg-neutral-600" />
-                <div className="flex items-center gap-2">
-                  <MapPin className="h-5 w-5 text-accent-500" />
-                  <span>{HACKATHON_CONFIG.venue.name}</span>
-                </div>
-                <div className="h-1 w-1 rounded-full bg-neutral-600" />
-                <div className="flex items-center gap-2">
-                  <Users className="h-5 w-5 text-primary-500" />
-                  <span>500+ Participants</span>
-                </div>
-              </div>
+              {/* Quick Stats */}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.5 }}
+                className="flex flex-wrap items-center justify-center gap-6 text-xs font-mono text-gray-500"
+              >
+                <span className="flex items-center gap-2">
+                  <Clock className="w-4 h-4 text-terminal-green" />
+                  MARCH 15-16, 2026
+                </span>
+                <span className="w-1 h-1 bg-gray-600 rounded-full" />
+                <span className="flex items-center gap-2">
+                  <Users className="w-4 h-4 text-terminal-green" />
+                  500+ PARTICIPANTS
+                </span>
+                <span className="w-1 h-1 bg-gray-600 rounded-full" />
+                <span className="flex items-center gap-2">
+                  <Trophy className="w-4 h-4 text-terminal-green" />
+                  ₹5L+ PRIZES
+                </span>
+              </motion.div>
             </motion.div>
 
-            {/* Scroll indicator */}
+            {/* Scroll Indicator */}
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: introComplete ? 1 : 0 }}
               transition={{ delay: 1 }}
-              className="absolute bottom-8 left-1/2 -translate-x-1/2"
+              className="absolute bottom-8"
             >
               <motion.div
                 animate={{ y: [0, 8, 0] }}
                 transition={{ duration: 2, repeat: Infinity }}
-                className="flex flex-col items-center gap-2 text-gray-500"
+                className="flex flex-col items-center gap-2 text-terminal-green/50"
               >
-                <ChevronDown className="h-6 w-6" />
+                <span className="text-[10px] font-mono tracking-widest">SCROLL_DOWN</span>
+                <ChevronDown className="w-5 h-5" />
               </motion.div>
             </motion.div>
           </div>
         </section>
 
+        {/* Marquee */}
+        <div className="border-y border-terminal-green/20 bg-black py-3 overflow-hidden">
+          <div className="marquee-container">
+            <div className="marquee-content">
+              {Array.from({ length: 20 }).map((_, i) => (
+                <span key={i} className="mx-8 text-sm font-mono text-terminal-green/60">
+                  {"/// HACK · BUILD · DEPLOY ///"}
+                </span>
+              ))}
+            </div>
+          </div>
+        </div>
+
         {/* Stats Section */}
-        <section className="border-y border-white/10 bg-zinc-900/50 py-16">
-          <div className="mx-auto max-w-7xl px-4">
-            <div className="grid grid-cols-2 gap-8 md:grid-cols-4">
-              {stats.map((stat, index) => (
+        <section className="py-20 border-b border-terminal-green/10">
+          <div className="mx-auto max-w-6xl px-6">
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+              {stats.map((stat, i) => (
                 <motion.div
                   key={stat.label}
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
-                  transition={{ delay: index * 0.1 }}
+                  transition={{ delay: i * 0.1 }}
                   className="text-center"
                 >
-                  <stat.icon className="mx-auto mb-4 h-8 w-8 text-primary-500" />
-                  <div className="text-3xl font-black text-white md:text-4xl">
+                  <stat.icon className="w-6 h-6 mx-auto mb-4 text-terminal-green" />
+                  <div className="text-3xl md:text-4xl font-display font-bold text-white mb-2">
                     {stat.value}
                   </div>
-                  <div className="mt-1 font-mono text-sm uppercase tracking-wider text-gray-400">
+                  <div className="text-[10px] font-mono text-gray-500 tracking-wider">
                     {stat.label}
                   </div>
                 </motion.div>
@@ -298,40 +362,46 @@ export default function Home() {
           </div>
         </section>
 
-        {/* Features Section */}
+        {/* About Section */}
         <section className="py-24">
-          <div className="mx-auto max-w-7xl px-4">
+          <div className="mx-auto max-w-6xl px-6">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              className="mb-16 text-center"
+              className="text-center mb-16"
             >
-              <h2 className="mb-4 text-4xl font-black uppercase tracking-wider text-white md:text-5xl">
-                Why <span className="text-primary-500">Join</span> Us?
+              <span className="text-xs font-mono text-terminal-green tracking-widest">
+                {"/// SYSTEM_MODULES"}
+              </span>
+              <h2 className="mt-4 text-3xl md:text-5xl font-display font-bold text-white">
+                Why <span className="text-terminal-green">Compete</span>?
               </h2>
-              <p className="mx-auto max-w-2xl font-mono text-gray-400">
-                More than just a hackathon – it&apos;s an experience that will transform your skills
-              </p>
             </motion.div>
 
-            <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
-              {features.map((feature, index) => (
+            <div className="grid md:grid-cols-2 gap-6">
+              {features.map((feature, i) => (
                 <motion.div
                   key={feature.title}
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
-                  transition={{ delay: index * 0.1 }}
-                  className="group border border-white/10 bg-zinc-900/50 p-6 transition-all hover:border-primary-600/50"
+                  transition={{ delay: i * 0.1 }}
+                  className="terminal-card p-6 group hover:border-terminal-green/40 transition-colors"
                 >
-                  <feature.icon className="mb-4 h-10 w-10 text-primary-500 transition-transform group-hover:scale-110" />
-                  <h3 className="mb-2 text-xl font-bold uppercase text-white">
-                    {feature.title}
-                  </h3>
-                  <p className="font-mono text-sm text-gray-400">
-                    {feature.description}
-                  </p>
+                  <div className="flex items-start gap-4">
+                    <div className="flex items-center justify-center w-12 h-12 border border-terminal-green/30 bg-terminal-green/5">
+                      <feature.icon className="w-6 h-6 text-terminal-green" />
+                    </div>
+                    <div>
+                      <h3 className="text-sm font-mono font-bold text-white mb-2">
+                        {feature.title}
+                      </h3>
+                      <p className="text-xs font-mono text-gray-500 leading-relaxed">
+                        {feature.description}
+                      </p>
+                    </div>
+                  </div>
                 </motion.div>
               ))}
             </div>
@@ -339,34 +409,37 @@ export default function Home() {
         </section>
 
         {/* Tracks Section */}
-        <section className="border-y border-white/10 bg-zinc-900/30 py-24">
-          <div className="mx-auto max-w-7xl px-4">
+        <section className="py-24 border-y border-terminal-green/10 bg-black">
+          <div className="mx-auto max-w-6xl px-6">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              className="mb-16 text-center"
+              className="text-center mb-16"
             >
-              <h2 className="mb-4 text-4xl font-black uppercase tracking-wider text-white md:text-5xl">
-                Hackathon <span className="text-primary-500">Tracks</span>
+              <span className="text-xs font-mono text-terminal-green tracking-widest">
+                {"/// COMPETITION_TRACKS"}
+              </span>
+              <h2 className="mt-4 text-3xl md:text-5xl font-display font-bold text-white">
+                Choose Your <span className="text-terminal-green">Battleground</span>
               </h2>
-              <p className="mx-auto max-w-2xl font-mono text-gray-400">
-                Choose your battleground and build solutions that matter
-              </p>
             </motion.div>
 
-            <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
-              {tracks.map((track, index) => (
+            <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
+              {tracks.map((track, i) => (
                 <motion.div
                   key={track.name}
                   initial={{ opacity: 0, scale: 0.9 }}
                   whileInView={{ opacity: 1, scale: 1 }}
                   viewport={{ once: true }}
-                  transition={{ delay: index * 0.1 }}
+                  transition={{ delay: i * 0.1 }}
                   whileHover={{ scale: 1.05 }}
-                  className={`cursor-pointer border border-white/10 bg-gradient-to-br ${track.color} p-6 text-center transition-all hover:border-white/30`}
+                  className="terminal-card p-6 text-center cursor-pointer hover:border-terminal-green/40 transition-all"
                 >
-                  <span className="text-lg font-bold uppercase tracking-wider text-white">
+                  <span className={`block text-[10px] font-mono mb-2 ${track.color}`}>
+                    {track.code}
+                  </span>
+                  <span className="block text-sm font-mono font-bold text-white">
                     {track.name}
                   </span>
                 </motion.div>
@@ -375,34 +448,34 @@ export default function Home() {
           </div>
         </section>
 
-        {/* CTA Section */}
+        {/* Final CTA */}
         <section className="py-24">
-          <div className="mx-auto max-w-4xl px-4 text-center">
+          <div className="mx-auto max-w-4xl px-6 text-center">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
             >
-              <h2 className="mb-6 text-4xl font-black uppercase tracking-wider text-white md:text-5xl">
-                Ready to <span className="text-primary-500">Hack</span>?
+              <Terminal className="w-12 h-12 mx-auto mb-6 text-terminal-green" />
+              <h2 className="text-3xl md:text-5xl font-display font-bold text-white mb-4">
+                READY TO <span className="text-terminal-green">HACK</span>?
               </h2>
-              <p className="mx-auto mb-10 max-w-xl font-mono text-gray-400">
-                Join 500+ developers, designers, and innovators for 36 hours of building,
-                learning, and competing for amazing prizes.
+              <p className="text-sm font-mono text-gray-500 mb-8 max-w-md mx-auto">
+                Join 500+ developers, designers, and innovators. 36 hours. One mission. Build something incredible.
               </p>
-              <Link href="/register">
-                <Button
-                  variant="gradient"
-                  size="xl"
-                  rightIcon={<ArrowRight className="h-5 w-5" />}
-                >
-                  Register Now
-                </Button>
+              <Link
+                href="/register"
+                className="inline-flex items-center gap-2 px-10 py-4 bg-terminal-green text-black font-mono font-bold text-sm tracking-wider hover:bg-terminal-green/90 transition-colors"
+              >
+                INITIALIZE_REGISTRATION
+                <ExternalLink className="w-4 h-4" />
               </Link>
             </motion.div>
           </div>
         </section>
       </main>
+
+      <Footer />
     </>
   );
 }

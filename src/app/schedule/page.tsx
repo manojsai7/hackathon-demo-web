@@ -1,64 +1,66 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Calendar, Clock, MapPin, Coffee, Code, Users, Award, Mic, Pizza } from "lucide-react";
+import { Clock, Coffee, Code2, Trophy, Users, Utensils, Mic, Rocket } from "lucide-react";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 
-const schedule = {
-  day1: {
-    date: "March 15, 2026 (Saturday)",
-    events: [
-      { time: "08:00", title: "Check-in Opens", icon: MapPin, desc: "Grab your badge, find your spot" },
-      { time: "09:00", title: "Opening Ceremony", icon: Mic, desc: "Kickoff, sponsors intro, rules" },
-      { time: "10:00", title: "Team Formation", icon: Users, desc: "Find your crew or form one" },
-      { time: "10:30", title: "Hacking Begins!", icon: Code, desc: "Clock starts. Build something." },
-      { time: "12:30", title: "Lunch", icon: Pizza, desc: "Fuel up. Long night ahead." },
-      { time: "14:00", title: "Workshop: API Masterclass", icon: Code, desc: "Build integrations that work" },
-      { time: "16:00", title: "Workshop: Design Sprint", icon: Users, desc: "UI/UX in 60 minutes" },
-      { time: "19:00", title: "Dinner", icon: Pizza, desc: "More food. You'll need it." },
-      { time: "21:00", title: "Mentor Check-ins", icon: Users, desc: "Get feedback, pivot if needed" },
-      { time: "23:00", title: "Midnight Snacks", icon: Coffee, desc: "Energy drinks available" },
-    ],
-  },
-  day2: {
-    date: "March 16, 2026 (Sunday)",
-    events: [
-      { time: "02:00", title: "Late Night Fun", icon: Coffee, desc: "Mini-games, music, vibes" },
-      { time: "07:00", title: "Breakfast", icon: Pizza, desc: "Wake up. Or don't sleep at all." },
-      { time: "10:00", title: "Code Freeze Warning", icon: Clock, desc: "2 hours left to build" },
-      { time: "12:00", title: "Code Freeze", icon: Code, desc: "Stop coding. Start presenting." },
-      { time: "12:30", title: "Lunch + Prep", icon: Pizza, desc: "Polish those slides" },
-      { time: "13:30", title: "Demo Presentations", icon: Mic, desc: "Show what you built" },
-      { time: "16:00", title: "Judging", icon: Award, desc: "Judges deliberate" },
-      { time: "17:00", title: "Awards Ceremony", icon: Award, desc: "Winners announced!" },
-      { time: "18:00", title: "Closing & Networking", icon: Users, desc: "Celebrate, connect, go home" },
-    ],
-  },
+const scheduleDay1 = [
+  { time: "08:00", event: "REGISTRATION_OPEN", icon: Users, type: "logistics" },
+  { time: "09:00", event: "OPENING_CEREMONY", icon: Mic, type: "ceremony" },
+  { time: "10:00", event: "HACKATHON_BEGINS", icon: Rocket, type: "main" },
+  { time: "10:30", event: "WORKSHOP: AI/ML_FUNDAMENTALS", icon: Code2, type: "workshop" },
+  { time: "13:00", event: "LUNCH_BREAK", icon: Utensils, type: "break" },
+  { time: "14:00", event: "WORKSHOP: WEB3_DEVELOPMENT", icon: Code2, type: "workshop" },
+  { time: "16:00", event: "MENTOR_SESSIONS_BEGIN", icon: Users, type: "mentoring" },
+  { time: "19:00", event: "DINNER_BREAK", icon: Utensils, type: "break" },
+  { time: "21:00", event: "MIDNIGHT_SNACKS", icon: Coffee, type: "break" },
+  { time: "23:59", event: "DAY_1_ENDS", icon: Clock, type: "logistics" },
+];
+
+const scheduleDay2 = [
+  { time: "00:00", event: "CODING_CONTINUES", icon: Code2, type: "main" },
+  { time: "03:00", event: "LATE_NIGHT_REFRESHMENTS", icon: Coffee, type: "break" },
+  { time: "07:00", event: "BREAKFAST", icon: Utensils, type: "break" },
+  { time: "10:00", event: "CODE_FREEZE", icon: Clock, type: "main" },
+  { time: "10:30", event: "DEMO_PREPARATION", icon: Code2, type: "main" },
+  { time: "11:00", event: "JUDGING_BEGINS", icon: Trophy, type: "ceremony" },
+  { time: "14:00", event: "LUNCH_BREAK", icon: Utensils, type: "break" },
+  { time: "15:00", event: "FINAL_PRESENTATIONS", icon: Mic, type: "ceremony" },
+  { time: "17:00", event: "CLOSING_CEREMONY", icon: Trophy, type: "ceremony" },
+  { time: "18:00", event: "NETWORKING_SESSION", icon: Users, type: "logistics" },
+];
+
+const typeColors: Record<string, string> = {
+  main: "border-terminal-green/40 bg-terminal-green/5",
+  workshop: "border-terminal-cyan/40 bg-terminal-cyan/5",
+  ceremony: "border-terminal-amber/40 bg-terminal-amber/5",
+  break: "border-gray-700 bg-gray-900/50",
+  mentoring: "border-terminal-purple/40 bg-terminal-purple/5",
+  logistics: "border-gray-700 bg-gray-900/50",
+};
+
+const typeTextColors: Record<string, string> = {
+  main: "text-terminal-green",
+  workshop: "text-terminal-cyan",
+  ceremony: "text-terminal-amber",
+  break: "text-gray-500",
+  mentoring: "text-terminal-purple",
+  logistics: "text-gray-500",
 };
 
 export default function SchedulePage() {
   return (
     <>
       <Navbar />
-      <main className="min-h-screen pt-20 bg-black">
+      <main className="min-h-screen pt-20 bg-hacker-bg">
         {/* Hero */}
         <section className="relative overflow-hidden py-20 lg:py-28">
-          <div className="absolute inset-0 bg-black" />
-          {/* Grid pattern */}
-          <div
-            className="absolute inset-0 opacity-20"
-            style={{
-              backgroundImage: `linear-gradient(rgba(220, 38, 38, 0.15) 1px, transparent 1px),
-                               linear-gradient(90deg, rgba(220, 38, 38, 0.15) 1px, transparent 1px)`,
-              backgroundSize: "60px 60px",
-            }}
-          />
-          {/* Red glow */}
+          <div className="absolute inset-0 grid-pattern opacity-50" />
           <div
             className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px]"
             style={{
-              background: "radial-gradient(ellipse, rgba(220, 38, 38, 0.15) 0%, transparent 70%)",
+              background: "radial-gradient(ellipse, rgba(0, 255, 0, 0.1) 0%, transparent 70%)",
             }}
           />
           
@@ -66,61 +68,55 @@ export default function SchedulePage() {
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
             >
-              <span className="inline-block mb-4 text-red-500 font-mono text-sm tracking-widest uppercase border border-red-600/30 bg-red-600/10 px-4 py-2">
-                Schedule
-              </span>
-              <h1 className="text-4xl md:text-6xl lg:text-7xl font-black uppercase tracking-wider text-white mb-6">
-                36 Hours. <span className="text-red-500">Every Minute</span> Counts.
+              <div className="protocol-box mx-auto mb-6 w-fit">
+                <span className="status-online" />
+                EXECUTION_TIMELINE
+              </div>
+              <h1 className="text-4xl md:text-6xl lg:text-7xl font-display font-black text-white tracking-wider mb-6">
+                EVENT <span className="text-terminal-green glow-text-subtle">SCHEDULE</span>
               </h1>
-              <p className="text-gray-500 font-mono text-lg max-w-xl mx-auto">
-                Here&apos;s the game plan. Times are approximate—we&apos;re hackers, not accountants.
+              <p className="text-gray-500 font-mono text-sm max-w-xl mx-auto">
+                36 hours of non-stop hacking. Here&apos;s your mission briefing.
               </p>
             </motion.div>
           </div>
         </section>
 
-        {/* Timeline */}
-        <section className="py-16 lg:py-24 bg-zinc-950">
+        {/* Schedule */}
+        <section className="py-16">
           <div className="mx-auto max-w-4xl px-6">
             {/* Day 1 */}
             <motion.div
-              initial={{ opacity: 0 }}
-              whileInView={{ opacity: 1 }}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               className="mb-16"
             >
               <div className="flex items-center gap-4 mb-8">
-                <div className="w-14 h-14 bg-red-600 flex items-center justify-center">
-                  <Calendar className="w-7 h-7 text-white" />
+                <div className="px-4 py-2 bg-terminal-green text-black font-mono font-bold text-sm">
+                  DAY_01
                 </div>
-                <div>
-                  <h2 className="text-2xl font-black uppercase tracking-wide text-white">Day 1</h2>
-                  <p className="text-gray-500 font-mono">{schedule.day1.date}</p>
-                </div>
+                <span className="text-xs font-mono text-gray-500">MARCH 15, 2026</span>
               </div>
 
-              <div className="space-y-4">
-                {schedule.day1.events.map((event, index) => (
+              <div className="space-y-3">
+                {scheduleDay1.map((item, i) => (
                   <motion.div
-                    key={index}
+                    key={`d1-${i}`}
                     initial={{ opacity: 0, x: -20 }}
                     whileInView={{ opacity: 1, x: 0 }}
                     viewport={{ once: true }}
-                    transition={{ delay: index * 0.05 }}
-                    className="flex gap-4 p-4 bg-zinc-900/50 border border-white/10 hover:border-red-600/50 transition-colors group"
+                    transition={{ delay: i * 0.05 }}
+                    className={`flex items-center gap-4 p-4 border ${typeColors[item.type]} transition-colors`}
                   >
-                    <div className="flex-shrink-0 w-16 text-right">
-                      <span className="font-mono text-red-500 font-bold">{event.time}</span>
-                    </div>
-                    <div className="flex-shrink-0 w-10 h-10 bg-zinc-800 border border-white/10 flex items-center justify-center text-gray-500 group-hover:bg-red-600 group-hover:border-red-600 group-hover:text-white transition-colors">
-                      <event.icon className="w-5 h-5" />
-                    </div>
-                    <div className="flex-1">
-                      <h3 className="text-white font-bold uppercase tracking-wide">{event.title}</h3>
-                      <p className="text-gray-500 font-mono text-sm">{event.desc}</p>
-                    </div>
+                    <span className="text-xs font-mono text-terminal-green w-14 shrink-0">
+                      {item.time}
+                    </span>
+                    <item.icon className={`w-4 h-4 shrink-0 ${typeTextColors[item.type]}`} />
+                    <span className={`text-sm font-mono ${typeTextColors[item.type]}`}>
+                      {item.event}
+                    </span>
                   </motion.div>
                 ))}
               </div>
@@ -128,40 +124,34 @@ export default function SchedulePage() {
 
             {/* Day 2 */}
             <motion.div
-              initial={{ opacity: 0 }}
-              whileInView={{ opacity: 1 }}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
             >
               <div className="flex items-center gap-4 mb-8">
-                <div className="w-14 h-14 bg-orange-600 flex items-center justify-center">
-                  <Calendar className="w-7 h-7 text-white" />
+                <div className="px-4 py-2 bg-terminal-amber text-black font-mono font-bold text-sm">
+                  DAY_02
                 </div>
-                <div>
-                  <h2 className="text-2xl font-black uppercase tracking-wide text-white">Day 2</h2>
-                  <p className="text-gray-500 font-mono">{schedule.day2.date}</p>
-                </div>
+                <span className="text-xs font-mono text-gray-500">MARCH 16, 2026</span>
               </div>
 
-              <div className="space-y-4">
-                {schedule.day2.events.map((event, index) => (
+              <div className="space-y-3">
+                {scheduleDay2.map((item, i) => (
                   <motion.div
-                    key={index}
+                    key={`d2-${i}`}
                     initial={{ opacity: 0, x: -20 }}
                     whileInView={{ opacity: 1, x: 0 }}
                     viewport={{ once: true }}
-                    transition={{ delay: index * 0.05 }}
-                    className="flex gap-4 p-4 bg-zinc-900/50 border border-white/10 hover:border-orange-600/50 transition-colors group"
+                    transition={{ delay: i * 0.05 }}
+                    className={`flex items-center gap-4 p-4 border ${typeColors[item.type]} transition-colors`}
                   >
-                    <div className="flex-shrink-0 w-16 text-right">
-                      <span className="font-mono text-orange-500 font-bold">{event.time}</span>
-                    </div>
-                    <div className="flex-shrink-0 w-10 h-10 bg-zinc-800 border border-white/10 flex items-center justify-center text-gray-500 group-hover:bg-orange-600 group-hover:border-orange-600 group-hover:text-white transition-colors">
-                      <event.icon className="w-5 h-5" />
-                    </div>
-                    <div className="flex-1">
-                      <h3 className="text-white font-bold uppercase tracking-wide">{event.title}</h3>
-                      <p className="text-gray-500 font-mono text-sm">{event.desc}</p>
-                    </div>
+                    <span className="text-xs font-mono text-terminal-amber w-14 shrink-0">
+                      {item.time}
+                    </span>
+                    <item.icon className={`w-4 h-4 shrink-0 ${typeTextColors[item.type]}`} />
+                    <span className={`text-sm font-mono ${typeTextColors[item.type]}`}>
+                      {item.event}
+                    </span>
                   </motion.div>
                 ))}
               </div>
@@ -169,19 +159,31 @@ export default function SchedulePage() {
           </div>
         </section>
 
-        {/* CTA */}
-        <section className="py-16 bg-black border-t border-white/10">
-          <div className="mx-auto max-w-3xl px-6 text-center">
-            <h2 className="text-2xl font-black uppercase tracking-wider text-white mb-4">Ready to Join?</h2>
-            <p className="text-gray-500 font-mono mb-8">
-              Registration closes when we hit capacity. Don&apos;t wait.
-            </p>
-            <a
-              href="/register"
-              className="inline-flex items-center gap-2 px-8 py-4 bg-red-600 text-white font-bold uppercase tracking-wide hover:bg-red-700 transition-all hover:shadow-[0_0_40px_rgba(220,38,38,0.5)]"
-            >
-              Register Now
-            </a>
+        {/* Legend */}
+        <section className="py-12 border-t border-terminal-green/10">
+          <div className="mx-auto max-w-4xl px-6">
+            <div className="flex flex-wrap items-center justify-center gap-6 text-xs font-mono">
+              <div className="flex items-center gap-2">
+                <div className="w-3 h-3 bg-terminal-green" />
+                <span className="text-gray-500">MAIN_EVENT</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <div className="w-3 h-3 bg-terminal-cyan" />
+                <span className="text-gray-500">WORKSHOP</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <div className="w-3 h-3 bg-terminal-amber" />
+                <span className="text-gray-500">CEREMONY</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <div className="w-3 h-3 bg-terminal-purple" />
+                <span className="text-gray-500">MENTORING</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <div className="w-3 h-3 bg-gray-600" />
+                <span className="text-gray-500">BREAK</span>
+              </div>
+            </div>
           </div>
         </section>
       </main>

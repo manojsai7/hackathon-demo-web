@@ -2,92 +2,76 @@
 
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { ChevronDown, MessageCircle } from "lucide-react";
+import { ChevronDown, HelpCircle } from "lucide-react";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 
 const faqs = [
   {
-    category: "General",
+    category: "GENERAL",
     questions: [
       {
-        q: "What even is a hackathon?",
-        a: "It's a 36-hour event where you team up with others to build a working prototype of an app, website, or tool. Think of it as a creative sprint where you learn fast, break things, and (hopefully) make something cool.",
+        q: "What is INNOHACK?",
+        a: "INNOHACK is a 36-hour national-level hackathon where developers, designers, and innovators come together to build solutions to real-world problems. It's organized to foster innovation and provide a platform for students to showcase their skills.",
       },
       {
-        q: "Who can participate?",
-        a: "Anyone! Students, professionals, hobbyists—if you're curious and willing to learn, you're in. We welcome all skill levels from complete beginners to seasoned developers.",
+        q: "When and where is INNOHACK happening?",
+        a: "INNOHACK 2K26 will take place on March 15-16, 2026. The event will be held at our partner institution's campus. Detailed venue information will be shared with registered participants.",
       },
       {
-        q: "Do I need to know how to code?",
-        a: "Nope. Teams need designers, idea people, presenters, and project managers too. If you can't code, you can learn during our workshops or contribute in other ways.",
-      },
-      {
-        q: "Is it free?",
-        a: "There's a small registration fee (₹299 per person) to ensure commitment. This covers food, swag, and event costs. Trust us, it's worth way more.",
+        q: "Is there a registration fee?",
+        a: "Yes, there is a nominal registration fee that covers meals, swag kit, and event infrastructure. The exact amount will be displayed during registration.",
       },
     ],
   },
   {
-    category: "Teams & Registration",
+    category: "PARTICIPATION",
     questions: [
       {
-        q: "Do I need a team to register?",
-        a: "Nope! You can register solo and form a team at the event. We'll have team formation activities on Day 1. Many winning teams are formed on-site.",
+        q: "Who can participate?",
+        a: "INNOHACK is open to all college students across India. You need a valid college ID to participate. Both undergraduate and postgraduate students are welcome.",
       },
       {
         q: "What's the team size?",
-        a: "2-4 members per team. No solo submissions, no 10-person squads. Find your balance.",
+        a: "Teams can have 2-4 members. Solo participation is not allowed as we believe in the power of collaboration. Don't have a team? No worries—we have team formation sessions!",
       },
       {
-        q: "Can I participate remotely?",
-        a: "This is an in-person event only. Part of the magic is being in the room with 500 other hackers. Virtual just isn't the same.",
-      },
-      {
-        q: "How do I register my team?",
-        a: "Each member registers individually. During the event, you'll link up with your team through our portal. If you already have teammates, just register together.",
+        q: "Can I participate if I'm a beginner?",
+        a: "Absolutely! INNOHACK welcomes participants of all skill levels. We have workshops, mentors, and resources to help you learn and build. The best projects often come from fresh perspectives.",
       },
     ],
   },
   {
-    category: "During the Event",
+    category: "TECHNICAL",
     questions: [
+      {
+        q: "What can I build?",
+        a: "You can build anything that fits within our tracks: AI/ML, Web3, FinTech, HealthTech, or Open Innovation. Your project should be started from scratch during the hackathon—no pre-built projects allowed.",
+      },
       {
         q: "What should I bring?",
-        a: "Laptop, charger, any hardware you need, toiletries, a change of clothes, and a sleeping bag if you want to nap. We provide food, Wi-Fi, and power strips.",
+        a: "Bring your laptop, chargers, any hardware you need, valid college ID, and most importantly—your ideas! We'll provide power strips, internet, food, and a place to crash if you need rest.",
       },
       {
-        q: "Will there be food?",
-        a: "Yes! Breakfast, lunch, dinner, and midnight snacks. Vegetarian and vegan options available. Energy drinks and coffee will flow freely.",
-      },
-      {
-        q: "Can I sleep at the venue?",
-        a: "Yes, we'll have designated quiet areas. Bring a sleeping bag or blanket. Most hackers power through, but rest is important.",
-      },
-      {
-        q: "What tech/tools can I use?",
-        a: "Anything you want! Any language, framework, API, or platform. Pre-existing code must be declared. We encourage using our sponsor APIs for bonus points.",
+        q: "What tech stack can I use?",
+        a: "Any! We don't restrict your technology choices. Use whatever languages, frameworks, and tools you're comfortable with. Cloud credits and API access will be provided by our sponsors.",
       },
     ],
   },
   {
-    category: "Judging & Prizes",
+    category: "LOGISTICS",
     questions: [
       {
-        q: "How are projects judged?",
-        a: "Innovation (30%), Technical Complexity (25%), Real-World Impact (25%), and Design/UX (20%). Judges are industry professionals and past hackathon winners.",
+        q: "Will food be provided?",
+        a: "Yes! We provide all meals, snacks, and beverages throughout the 36-hour event. We accommodate dietary restrictions—just let us know during registration.",
       },
       {
-        q: "When do I need to submit?",
-        a: "Code freeze is at 12:00 PM on Day 2. You'll have until then to push your code. Presentations happen right after lunch.",
+        q: "Can I sleep during the hackathon?",
+        a: "You can, but you probably won't want to! We'll have a designated rest area with sleeping bags if you need to recharge. Coffee will be your best friend.",
       },
       {
-        q: "What if my project doesn't work?",
-        a: "It happens! Judges understand that hackathon projects are MVPs. Focus on demonstrating your idea and what you learned. The demo matters more than perfection.",
-      },
-      {
-        q: "How are prizes distributed?",
-        a: "Prize money is split equally among team members. Track prizes are separate from main prizes—you can win both. Payments processed within 2 weeks.",
+        q: "What COVID protocols are in place?",
+        a: "We follow all government guidelines. Temperature checks, sanitizer stations, and well-ventilated spaces will be available. We recommend being fully vaccinated.",
       },
     ],
   },
@@ -97,17 +81,22 @@ function FAQItem({ question, answer }: { question: string; answer: string }) {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <div className="border-b border-white/10 last:border-0">
+    <motion.div
+      initial={{ opacity: 0 }}
+      whileInView={{ opacity: 1 }}
+      viewport={{ once: true }}
+      className="border-b border-terminal-green/10"
+    >
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="w-full flex items-center justify-between py-5 text-left group"
+        className="w-full flex items-center justify-between py-4 text-left group"
       >
-        <span className="text-white font-bold uppercase tracking-wide pr-8 group-hover:text-red-500 transition-colors">
+        <span className="text-sm font-mono text-gray-300 group-hover:text-terminal-green transition-colors pr-4">
           {question}
         </span>
         <ChevronDown
-          className={`w-5 h-5 text-gray-500 flex-shrink-0 transition-transform ${
-            isOpen ? "rotate-180 text-red-500" : ""
+          className={`w-4 h-4 text-terminal-green shrink-0 transition-transform ${
+            isOpen ? "rotate-180" : ""
           }`}
         />
       </button>
@@ -120,11 +109,13 @@ function FAQItem({ question, answer }: { question: string; answer: string }) {
             transition={{ duration: 0.2 }}
             className="overflow-hidden"
           >
-            <p className="pb-5 text-gray-500 font-mono leading-relaxed">{answer}</p>
+            <p className="pb-4 text-xs font-mono text-gray-500 leading-relaxed">
+              {answer}
+            </p>
           </motion.div>
         )}
       </AnimatePresence>
-    </div>
+    </motion.div>
   );
 }
 
@@ -132,48 +123,35 @@ export default function FAQPage() {
   return (
     <>
       <Navbar />
-      <main className="min-h-screen pt-20 bg-black">
+      <main className="min-h-screen pt-20 bg-hacker-bg">
         {/* Hero */}
         <section className="relative overflow-hidden py-20 lg:py-28">
-          <div className="absolute inset-0 bg-black" />
-          {/* Grid pattern */}
-          <div
-            className="absolute inset-0 opacity-20"
-            style={{
-              backgroundImage: `linear-gradient(rgba(220, 38, 38, 0.15) 1px, transparent 1px),
-                               linear-gradient(90deg, rgba(220, 38, 38, 0.15) 1px, transparent 1px)`,
-              backgroundSize: "60px 60px",
-            }}
-          />
-          {/* Red glow */}
+          <div className="absolute inset-0 grid-pattern opacity-50" />
           <div
             className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px]"
             style={{
-              background: "radial-gradient(ellipse, rgba(220, 38, 38, 0.15) 0%, transparent 70%)",
+              background: "radial-gradient(ellipse, rgba(0, 255, 0, 0.1) 0%, transparent 70%)",
             }}
           />
           
           <div className="relative z-10 mx-auto max-w-5xl px-6 text-center">
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
-            >
-              <span className="inline-block mb-4 text-red-500 font-mono text-sm tracking-widest uppercase border border-red-600/30 bg-red-600/10 px-4 py-2">
-                FAQ
-              </span>
-              <h1 className="text-4xl md:text-6xl lg:text-7xl font-black uppercase tracking-wider text-white mb-6">
-                Got <span className="text-red-500">Questions</span>?
+            <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }}>
+              <div className="protocol-box mx-auto mb-6 w-fit">
+                <HelpCircle className="w-3 h-3" />
+                HELP_DOCUMENTATION
+              </div>
+              <h1 className="text-4xl md:text-6xl lg:text-7xl font-display font-black text-white tracking-wider mb-6">
+                FREQUENTLY <span className="text-terminal-green glow-text-subtle">ASKED</span>
               </h1>
-              <p className="text-gray-500 font-mono text-lg max-w-xl mx-auto">
-                We probably have answers. If not, hit us up.
+              <p className="text-gray-500 font-mono text-sm max-w-xl mx-auto">
+                Got questions? We&apos;ve got answers. If you can&apos;t find what you&apos;re looking for, reach out to us.
               </p>
             </motion.div>
           </div>
         </section>
 
         {/* FAQ Sections */}
-        <section className="py-16 lg:py-24 bg-zinc-950">
+        <section className="py-16">
           <div className="mx-auto max-w-3xl px-6">
             {faqs.map((section, sectionIndex) => (
               <motion.div
@@ -182,15 +160,15 @@ export default function FAQPage() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: sectionIndex * 0.1 }}
-                className="mb-12 last:mb-0"
+                className="mb-12"
               >
-                <h2 className="text-xl font-black uppercase tracking-wider text-white mb-6 flex items-center gap-3">
-                  <span className="w-8 h-8 bg-red-600 flex items-center justify-center text-white text-sm font-mono">
-                    {sectionIndex + 1}
+                <div className="flex items-center gap-3 mb-6">
+                  <span className="text-xs font-mono text-terminal-green">
+                    {`/// ${section.category}`}
                   </span>
-                  {section.category}
-                </h2>
-                <div className="bg-zinc-900/50 border border-white/10 px-6">
+                  <div className="flex-1 h-px bg-terminal-green/20" />
+                </div>
+                <div className="terminal-card">
                   {section.questions.map((faq) => (
                     <FAQItem key={faq.q} question={faq.q} answer={faq.a} />
                   ))}
@@ -201,19 +179,26 @@ export default function FAQPage() {
         </section>
 
         {/* Still have questions */}
-        <section className="py-16 border-t border-neutral-800">
-          <div className="mx-auto max-w-3xl px-6 text-center">
-            <MessageCircle className="w-12 h-12 text-rose-400 mx-auto mb-4" />
-            <h2 className="text-2xl font-bold text-white mb-4">Still confused?</h2>
-            <p className="text-neutral-400 mb-8">
-              Reach out and we&apos;ll get back to you within 24 hours.
-            </p>
-            <a
-              href="/contact"
-              className="inline-flex items-center gap-2 px-8 py-4 bg-neutral-800 text-white font-semibold rounded-xl hover:bg-neutral-700 transition-colors"
+        <section className="py-16 border-t border-terminal-green/10">
+          <div className="mx-auto max-w-2xl px-6 text-center">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
             >
-              Contact Us
-            </a>
+              <h2 className="text-2xl font-display font-bold text-white mb-4">
+                Still have <span className="text-terminal-green">questions</span>?
+              </h2>
+              <p className="text-xs font-mono text-gray-500 mb-6">
+                Can&apos;t find the answer you&apos;re looking for? Reach out to our team.
+              </p>
+              <a
+                href="/contact"
+                className="inline-flex items-center gap-2 px-6 py-3 bg-terminal-green text-black font-mono font-bold text-sm tracking-wider hover:bg-terminal-green/90 transition-colors"
+              >
+                CONTACT_US
+              </a>
+            </motion.div>
           </div>
         </section>
       </main>

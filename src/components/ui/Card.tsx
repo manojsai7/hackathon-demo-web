@@ -5,8 +5,8 @@ import { cn } from "@/lib/utils";
 import { motion, HTMLMotionProps } from "framer-motion";
 
 interface CardProps extends Omit<HTMLMotionProps<"div">, "ref"> {
-  variant?: "default" | "glass" | "gradient" | "outlined";
-  hover?: "none" | "lift" | "glow" | "scale";
+  variant?: "default" | "terminal" | "outlined" | "glow";
+  hover?: "none" | "lift" | "glow" | "border";
   padding?: "none" | "sm" | "md" | "lg";
 }
 
@@ -15,7 +15,7 @@ const Card = forwardRef<HTMLDivElement, CardProps>(
     {
       className,
       variant = "default",
-      hover = "lift",
+      hover = "border",
       padding = "md",
       children,
       ...props
@@ -26,20 +26,20 @@ const Card = forwardRef<HTMLDivElement, CardProps>(
 
     const variants = {
       default:
-        "bg-zinc-900/50 border border-white/10",
-      glass:
-        "bg-zinc-900/50 backdrop-blur-xl border border-white/10",
-      gradient:
-        "bg-gradient-to-br from-primary-600/10 via-primary-700/10 to-accent-600/10 border border-white/10",
+        "bg-hacker-card border border-terminal-green/10",
+      terminal:
+        "bg-hacker-card border border-terminal-green/20 relative overflow-hidden before:absolute before:inset-0 before:bg-gradient-to-b before:from-terminal-green/5 before:to-transparent before:pointer-events-none",
       outlined:
-        "bg-transparent border border-white/10",
+        "bg-transparent border border-terminal-green/20",
+      glow:
+        "bg-hacker-card border border-terminal-green/30 shadow-glow-green",
     };
 
     const hoverEffects = {
       none: "",
-      lift: "hover:-translate-y-1 hover:border-primary-600/50",
-      glow: "hover:shadow-glow hover:border-primary-600/50",
-      scale: "hover:scale-[1.02]",
+      lift: "hover:-translate-y-1",
+      glow: "hover:shadow-glow-green hover:border-terminal-green/40",
+      border: "hover:border-terminal-green/40",
     };
 
     const paddings = {

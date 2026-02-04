@@ -2,10 +2,10 @@
 
 import { motion } from "framer-motion";
 import { ArrowRight, Sparkles, Users, Calendar } from "lucide-react";
-import Button from "@/components/ui/Button";
-import CountdownTimer from "@/components/sections/CountdownTimer";
-import { RegistrationCounter } from "@/components/sections/AnimatedCounter";
-import { HACKATHON_CONFIG } from "@/lib/constants";
+import Button from "../ui/Button";
+import CountdownTimer from "./CountdownTimer";
+import { RegistrationCounter } from "./AnimatedCounter";
+import { HACKATHON_CONFIG } from "../../lib/constants";
 
 export default function Hero() {
   return (
@@ -107,8 +107,8 @@ export default function Hero() {
             transition={{ duration: 0.5, delay: 0.3 }}
             className="mb-16 flex flex-col items-center justify-center gap-4 sm:flex-row"
           >
-            <Button
-              variant="gradient"
+              <Button
+                variant="primary"
               size="xl"
               rightIcon={<ArrowRight className="h-5 w-5" />}
               onClick={() => {

@@ -64,7 +64,7 @@ export default function Error({
           className="flex flex-col items-center justify-center gap-4 sm:flex-row"
         >
           <Button
-            variant="gradient"
+            variant="primary"
             size="lg"
             leftIcon={<RefreshCw className="h-5 w-5" />}
             onClick={reset}

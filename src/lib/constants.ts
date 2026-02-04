@@ -33,6 +33,7 @@ export const HACKATHON_CONFIG = {
   duration: 36, // hours
   prizePool: 500000, // INR
   social: {
+    github: "https://github.com/innohack",
     instagram: "https://instagram.com/innohack",
     twitter: "https://twitter.com/innohack",
     linkedin: "https://linkedin.com/company/innohack",
