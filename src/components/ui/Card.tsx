@@ -26,13 +26,13 @@ const Card = forwardRef<HTMLDivElement, CardProps>(
 
     const variants = {
       default:
-        "bg-white dark:bg-dark-card border border-light-border dark:border-dark-border shadow-soft",
+        "bg-dark-card border border-dark-border/70 shadow-soft",
       glass:
-        "bg-white/10 dark:bg-dark-card/50 backdrop-blur-lg border border-white/20 dark:border-dark-border/50",
+        "bg-white/5 backdrop-blur-xl border border-white/10 shadow-glass",
       gradient:
-        "bg-gradient-to-br from-primary-500/10 via-purple-500/10 to-accent-500/10 border border-primary-500/20",
+        "bg-gradient-to-br from-primary-500/10 via-primary-600/10 to-accent-500/10 border border-white/10",
       outlined:
-        "bg-transparent border-2 border-light-border dark:border-dark-border",
+        "bg-transparent border-2 border-white/10",
     };
 
     const hoverEffects = {
