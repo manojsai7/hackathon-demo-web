@@ -113,7 +113,7 @@ export default function NotFound() {
           className="flex flex-col items-center justify-center gap-4 sm:flex-row"
         >
           <Link href="/">
-            <Button variant="gradient" size="lg" leftIcon={<Home className="h-5 w-5" />}>
+            <Button variant="primary" size="lg" leftIcon={<Home className="h-5 w-5" />}>
               Back to Home
             </Button>
           </Link>
