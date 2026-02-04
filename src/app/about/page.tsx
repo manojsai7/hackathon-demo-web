@@ -40,20 +40,36 @@ const stats = [
 ];
 
 const criteria = [
-  { label: "Innovation", value: 30, color: "bg-rose-500" },
-  { label: "Technical Depth", value: 25, color: "bg-orange-500" },
-  { label: "Real-World Impact", value: 25, color: "bg-amber-500" },
-  { label: "UX & Design", value: 20, color: "bg-red-400" },
+  { label: "Innovation", value: 30, color: "bg-red-600" },
+  { label: "Technical Depth", value: 25, color: "bg-orange-600" },
+  { label: "Real-World Impact", value: 25, color: "bg-amber-600" },
+  { label: "UX & Design", value: 20, color: "bg-red-500" },
 ];
 
 export default function AboutPage() {
   return (
     <>
       <Navbar />
-      <main className="min-h-screen pt-20">
+      <main className="min-h-screen pt-20 bg-black">
         {/* Hero Section */}
         <section className="relative overflow-hidden py-20 lg:py-28">
-          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-rose-950/40 via-neutral-950 to-neutral-950" />
+          <div className="absolute inset-0 bg-black" />
+          {/* Grid pattern */}
+          <div
+            className="absolute inset-0 opacity-20"
+            style={{
+              backgroundImage: `linear-gradient(rgba(220, 38, 38, 0.15) 1px, transparent 1px),
+                               linear-gradient(90deg, rgba(220, 38, 38, 0.15) 1px, transparent 1px)`,
+              backgroundSize: "60px 60px",
+            }}
+          />
+          {/* Red glow */}
+          <div
+            className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px]"
+            style={{
+              background: "radial-gradient(ellipse, rgba(220, 38, 38, 0.15) 0%, transparent 70%)",
+            }}
+          />
           
           <div className="relative z-10 mx-auto max-w-5xl px-6">
             <motion.div
@@ -62,13 +78,13 @@ export default function AboutPage() {
               transition={{ duration: 0.6 }}
               className="text-center"
             >
-              <span className="inline-block mb-4 text-rose-400 font-mono text-sm tracking-wider uppercase">
+              <span className="inline-block mb-4 text-red-500 font-mono text-sm tracking-widest uppercase border border-red-600/30 bg-red-600/10 px-4 py-2">
                 About InnoHack
               </span>
-              <h1 className="text-4xl md:text-6xl font-bold text-white mb-6 leading-tight">
-                Not another <span className="text-rose-400">boring</span> hackathon.
+              <h1 className="text-4xl md:text-6xl lg:text-7xl font-black uppercase tracking-wider text-white mb-6 leading-tight">
+                Not Another <span className="text-red-500">Boring</span> Hackathon
               </h1>
-              <p className="text-neutral-400 text-lg md:text-xl max-w-2xl mx-auto leading-relaxed">
+              <p className="text-gray-500 font-mono text-lg md:text-xl max-w-2xl mx-auto leading-relaxed">
                 We built InnoHack because we were tired of hackathons that felt like 
                 glorified coding marathons with stale pizza. This one&apos;s different.
               </p>

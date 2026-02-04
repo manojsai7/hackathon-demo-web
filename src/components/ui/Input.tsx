@@ -37,10 +37,10 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
         {label && (
           <label
             className={cn(
-              "mb-2 block text-sm font-medium transition-colors duration-200",
+              "mb-2 block text-sm font-bold uppercase tracking-wide transition-colors duration-200",
               isFocused
-                ? "text-primary-500"
-                : "text-gray-700 dark:text-gray-300",
+                ? "text-red-500"
+                : "text-gray-400",
               error && "text-red-500"
             )}
           >
@@ -68,16 +68,16 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
             onFocus={() => setIsFocused(true)}
             onBlur={() => setIsFocused(false)}
             className={cn(
-              "w-full rounded-xl border bg-white px-4 py-3 text-gray-900 transition-all duration-200",
-              "placeholder:text-gray-400",
-              "focus:outline-none focus:ring-2 focus:ring-primary-500/20 focus:border-primary-500",
-              "dark:bg-dark-card dark:text-white dark:border-dark-border",
-              "disabled:cursor-not-allowed disabled:opacity-50 disabled:bg-gray-100 dark:disabled:bg-dark-elevated",
+              "w-full border bg-zinc-900/50 px-4 py-3 text-white font-mono transition-all duration-200",
+              "placeholder:text-gray-600",
+              "focus:outline-none focus:ring-2 focus:ring-red-600/20 focus:border-red-600",
+              "border-white/10",
+              "disabled:cursor-not-allowed disabled:opacity-50 disabled:bg-zinc-800",
               leftIcon && "pl-11",
               (rightIcon || type === "password") && "pr-11",
               error
                 ? "border-red-500 focus:ring-red-500/20 focus:border-red-500"
-                : "border-light-border dark:border-dark-border",
+                : "border-white/10",
               className
             )}
             {...props}

@@ -97,17 +97,17 @@ function FAQItem({ question, answer }: { question: string; answer: string }) {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <div className="border-b border-neutral-800 last:border-0">
+    <div className="border-b border-white/10 last:border-0">
       <button
         onClick={() => setIsOpen(!isOpen)}
         className="w-full flex items-center justify-between py-5 text-left group"
       >
-        <span className="text-white font-medium pr-8 group-hover:text-rose-400 transition-colors">
+        <span className="text-white font-bold uppercase tracking-wide pr-8 group-hover:text-red-500 transition-colors">
           {question}
         </span>
         <ChevronDown
-          className={`w-5 h-5 text-neutral-400 flex-shrink-0 transition-transform ${
-            isOpen ? "rotate-180" : ""
+          className={`w-5 h-5 text-gray-500 flex-shrink-0 transition-transform ${
+            isOpen ? "rotate-180 text-red-500" : ""
           }`}
         />
       </button>
@@ -120,7 +120,7 @@ function FAQItem({ question, answer }: { question: string; answer: string }) {
             transition={{ duration: 0.2 }}
             className="overflow-hidden"
           >
-            <p className="pb-5 text-neutral-400 leading-relaxed">{answer}</p>
+            <p className="pb-5 text-gray-500 font-mono leading-relaxed">{answer}</p>
           </motion.div>
         )}
       </AnimatePresence>
@@ -132,10 +132,26 @@ export default function FAQPage() {
   return (
     <>
       <Navbar />
-      <main className="min-h-screen pt-20">
+      <main className="min-h-screen pt-20 bg-black">
         {/* Hero */}
         <section className="relative overflow-hidden py-20 lg:py-28">
-          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-rose-950/30 via-neutral-950 to-neutral-950" />
+          <div className="absolute inset-0 bg-black" />
+          {/* Grid pattern */}
+          <div
+            className="absolute inset-0 opacity-20"
+            style={{
+              backgroundImage: `linear-gradient(rgba(220, 38, 38, 0.15) 1px, transparent 1px),
+                               linear-gradient(90deg, rgba(220, 38, 38, 0.15) 1px, transparent 1px)`,
+              backgroundSize: "60px 60px",
+            }}
+          />
+          {/* Red glow */}
+          <div
+            className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px]"
+            style={{
+              background: "radial-gradient(ellipse, rgba(220, 38, 38, 0.15) 0%, transparent 70%)",
+            }}
+          />
           
           <div className="relative z-10 mx-auto max-w-5xl px-6 text-center">
             <motion.div
@@ -143,13 +159,13 @@ export default function FAQPage() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
             >
-              <span className="inline-block mb-4 text-rose-400 font-mono text-sm tracking-wider uppercase">
+              <span className="inline-block mb-4 text-red-500 font-mono text-sm tracking-widest uppercase border border-red-600/30 bg-red-600/10 px-4 py-2">
                 FAQ
               </span>
-              <h1 className="text-4xl md:text-6xl font-bold text-white mb-6">
-                Got questions?
+              <h1 className="text-4xl md:text-6xl lg:text-7xl font-black uppercase tracking-wider text-white mb-6">
+                Got <span className="text-red-500">Questions</span>?
               </h1>
-              <p className="text-neutral-400 text-lg max-w-xl mx-auto">
+              <p className="text-gray-500 font-mono text-lg max-w-xl mx-auto">
                 We probably have answers. If not, hit us up.
               </p>
             </motion.div>
@@ -157,7 +173,7 @@ export default function FAQPage() {
         </section>
 
         {/* FAQ Sections */}
-        <section className="py-16 lg:py-24">
+        <section className="py-16 lg:py-24 bg-zinc-950">
           <div className="mx-auto max-w-3xl px-6">
             {faqs.map((section, sectionIndex) => (
               <motion.div
@@ -168,13 +184,13 @@ export default function FAQPage() {
                 transition={{ delay: sectionIndex * 0.1 }}
                 className="mb-12 last:mb-0"
               >
-                <h2 className="text-xl font-bold text-white mb-6 flex items-center gap-3">
-                  <span className="w-8 h-8 rounded-lg bg-rose-500/20 flex items-center justify-center text-rose-400 text-sm font-mono">
+                <h2 className="text-xl font-black uppercase tracking-wider text-white mb-6 flex items-center gap-3">
+                  <span className="w-8 h-8 bg-red-600 flex items-center justify-center text-white text-sm font-mono">
                     {sectionIndex + 1}
                   </span>
                   {section.category}
                 </h2>
-                <div className="bg-neutral-900/50 rounded-2xl border border-neutral-800 px-6">
+                <div className="bg-zinc-900/50 border border-white/10 px-6">
                   {section.questions.map((faq) => (
                     <FAQItem key={faq.q} question={faq.q} answer={faq.a} />
                   ))}

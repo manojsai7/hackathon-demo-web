@@ -9,9 +9,9 @@ import { HACKATHON_CONFIG } from "@/lib/constants";
 
 export default function Hero() {
   return (
-    <section className="relative min-h-screen overflow-hidden bg-dark-base">
+    <section className="relative min-h-screen overflow-hidden bg-black">
       {/* Animated gradient background */}
-      <div className="absolute inset-0 bg-gradient-to-br from-dark-base via-dark-elevated to-dark-base" />
+      <div className="absolute inset-0 bg-gradient-to-br from-black via-zinc-900/50 to-black" />
 
       {/* Animated blobs */}
       <div className="absolute inset-0 overflow-hidden">
@@ -22,7 +22,7 @@ export default function Hero() {
             scale: [1, 1.1, 0.9, 1],
           }}
           transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-          className="absolute -left-40 top-20 h-96 w-96 rounded-full bg-primary-500/20 blur-3xl"
+          className="absolute -left-40 top-20 h-96 w-96 rounded-full bg-primary-600/20 blur-3xl"
         />
         <motion.div
           animate={{
@@ -31,7 +31,7 @@ export default function Hero() {
             scale: [1, 0.9, 1.1, 1],
           }}
           transition={{ duration: 25, repeat: Infinity, ease: "linear" }}
-          className="absolute -right-40 bottom-20 h-96 w-96 rounded-full bg-accent-500/20 blur-3xl"
+          className="absolute -right-40 bottom-20 h-96 w-96 rounded-full bg-accent-600/20 blur-3xl"
         />
         <motion.div
           animate={{
@@ -39,11 +39,11 @@ export default function Hero() {
             y: [0, -30, 30, 0],
           }}
           transition={{ duration: 30, repeat: Infinity, ease: "linear" }}
-          className="absolute left-1/3 top-1/3 h-64 w-64 rounded-full bg-primary-500/15 blur-3xl"
+          className="absolute left-1/3 top-1/3 h-64 w-64 rounded-full bg-primary-600/10 blur-3xl"
         />
       </div>
 
-      {/* Grid pattern overlay */}
+      {/* Grid pattern overlay - HackFest style */}
       <div
         className="absolute inset-0 opacity-20"
         style={{
@@ -61,7 +61,7 @@ export default function Hero() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
-            className="mb-8 inline-flex items-center gap-2 rounded-full border border-primary-500/30 bg-primary-500/10 px-4 py-2 text-sm text-primary-400"
+            className="mb-8 inline-flex items-center gap-2 border border-primary-600/30 bg-primary-600/10 px-4 py-2 text-sm font-mono text-primary-400"
           >
             <Sparkles className="h-4 w-4" />
             <span>March 15-16, 2026 • 36 Hours of Innovation</span>
@@ -72,18 +72,18 @@ export default function Hero() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.1 }}
-            className="mb-6 text-5xl font-bold leading-tight tracking-tight text-white md:text-7xl lg:text-8xl"
+            className="mb-6 text-5xl font-black uppercase leading-tight tracking-wider text-white md:text-7xl lg:text-8xl"
           >
             Ready to build{" "}
             <span className="relative">
-              <span className="relative z-10 bg-gradient-to-r from-primary-400 via-primary-500 to-accent-400 bg-clip-text text-transparent">
+              <span className="relative z-10 bg-gradient-to-r from-primary-500 via-primary-400 to-accent-500 bg-clip-text text-transparent">
                 something incredible
               </span>
               <motion.span
                 initial={{ scaleX: 0 }}
                 animate={{ scaleX: 1 }}
                 transition={{ duration: 0.8, delay: 0.5 }}
-                className="absolute -bottom-2 left-0 h-3 w-full origin-left bg-gradient-to-r from-primary-500/30 to-accent-500/30 blur-sm"
+                className="absolute -bottom-2 left-0 h-3 w-full origin-left bg-gradient-to-r from-primary-600/40 to-accent-600/40 blur-sm"
               />
             </span>
             ?
@@ -94,10 +94,10 @@ export default function Hero() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.2 }}
-            className="mx-auto mb-12 max-w-2xl text-lg text-gray-400 md:text-xl"
+            className="mx-auto mb-12 max-w-2xl text-lg font-mono text-gray-400 md:text-xl"
           >
-            {HACKATHON_CONFIG.description}. Designed with professional
-            hackathon teams so you can build with real-world rigor.
+            {HACKATHON_CONFIG.description}. Join the biggest student hackathon
+            and turn your wildest ideas into reality.
           </motion.p>
 
           {/* CTA Buttons */}
@@ -156,20 +156,20 @@ export default function Hero() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.6 }}
-            className="mt-12 flex flex-wrap items-center justify-center gap-6 text-sm text-gray-400"
+            className="mt-12 flex flex-wrap items-center justify-center gap-6 text-sm text-neutral-300"
           >
             <div className="flex items-center gap-2">
               <Calendar className="h-5 w-5 text-primary-500" />
               <span>March 15-16, 2026</span>
             </div>
-            <div className="h-1 w-1 rounded-full bg-gray-600" />
+            <div className="h-1 w-1 rounded-full bg-neutral-600" />
             <div className="flex items-center gap-2">
               <Users className="h-5 w-5 text-accent-500" />
               <span>500+ Participants</span>
             </div>
-            <div className="h-1 w-1 rounded-full bg-gray-600" />
+            <div className="h-1 w-1 rounded-full bg-neutral-600" />
             <div className="flex items-center gap-2">
-              <Sparkles className="h-5 w-5 text-accent-500" />
+              <Sparkles className="h-5 w-5 text-primary-500" />
               <span>₹5 Lakhs+ in Prizes</span>
             </div>
           </motion.div>
@@ -190,29 +190,13 @@ export default function Hero() {
             <span className="text-xs uppercase tracking-widest">Scroll</span>
             <div className="h-8 w-5 rounded-full border-2 border-gray-600 p-1">
               <motion.div
-                animate={{ y: [0, 12, 0] }}
-                transition={{ duration: 2, repeat: Infinity }}
-                className="h-2 w-1.5 rounded-full bg-gray-500"
+                animate={{ y: [0, 8, 0] }}
+                transition={{ duration: 1.5, repeat: Infinity }}
+                className="h-1.5 w-1.5 rounded-full bg-primary-500"
               />
             </div>
           </motion.div>
         </motion.div>
-      </div>
-
-      {/* Decorative elements */}
-      <div className="absolute left-10 top-1/4 hidden lg:block">
-        <motion.div
-          animate={{ rotate: 360 }}
-          transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-          className="h-32 w-32 rounded-3xl border border-primary-500/20"
-        />
-      </div>
-      <div className="absolute right-10 bottom-1/4 hidden lg:block">
-        <motion.div
-          animate={{ rotate: -360 }}
-          transition={{ duration: 25, repeat: Infinity, ease: "linear" }}
-          className="h-24 w-24 rounded-full border border-accent-500/20"
-        />
       </div>
     </section>
   );

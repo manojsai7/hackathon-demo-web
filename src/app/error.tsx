@@ -19,11 +19,15 @@ export default function Error({
   }, [error]);
 
   return (
-    <div className="flex min-h-screen flex-col items-center justify-center bg-dark-base px-4">
+    <div className="flex min-h-screen flex-col items-center justify-center bg-black px-4">
       {/* Background */}
       <div className="absolute inset-0 overflow-hidden">
-        <div className="absolute left-1/4 top-1/4 h-96 w-96 rounded-full bg-red-500/10 blur-3xl" />
-        <div className="absolute right-1/4 bottom-1/4 h-96 w-96 rounded-full bg-orange-500/10 blur-3xl" />
+        <div
+          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px]"
+          style={{
+            background: "radial-gradient(circle, rgba(220, 38, 38, 0.1) 0%, transparent 60%)",
+          }}
+        />
       </div>
 
       <div className="relative z-10 text-center">
@@ -32,9 +36,9 @@ export default function Error({
           initial={{ scale: 0 }}
           animate={{ scale: 1 }}
           transition={{ type: "spring", duration: 0.5 }}
-          className="mb-8 inline-flex h-24 w-24 items-center justify-center rounded-full bg-red-500/20"
+          className="mb-8 inline-flex h-24 w-24 items-center justify-center border-2 border-red-600 bg-red-600/20"
         >
-          <AlertTriangle className="h-12 w-12 text-red-400" />
+          <AlertTriangle className="h-12 w-12 text-red-500" />
         </motion.div>
 
         {/* Message */}
@@ -43,10 +47,10 @@ export default function Error({
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.2 }}
         >
-          <h1 className="mb-4 text-3xl font-bold text-white md:text-4xl">
-            Oops! Something went wrong 😅
+          <h1 className="mb-4 text-3xl font-black uppercase tracking-wider text-white md:text-4xl">
+            Something Went <span className="text-red-500">Wrong</span>
           </h1>
-          <p className="mx-auto mb-8 max-w-md text-gray-400">
+          <p className="mx-auto mb-8 max-w-md text-gray-500 font-mono">
             Don&apos;t worry, it happens to the best of us. Our dev team has been
             notified and is probably already debugging with a cup of coffee!
           </p>

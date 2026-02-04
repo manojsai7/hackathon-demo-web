@@ -31,19 +31,19 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
     ref
   ) => {
     const baseStyles =
-      "relative inline-flex items-center justify-center font-semibold rounded-xl transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed overflow-hidden";
+      "relative inline-flex items-center justify-center font-bold uppercase tracking-wide transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-black disabled:opacity-50 disabled:cursor-not-allowed overflow-hidden";
 
     const variants = {
       primary:
-        "bg-primary-600 text-white hover:bg-primary-500 focus:ring-primary-500 shadow-lg hover:shadow-xl hover:shadow-primary-500/30",
+        "bg-primary-600 text-white hover:bg-primary-700 focus:ring-primary-500 shadow-[0_0_20px_rgba(220,38,38,0.3)] hover:shadow-[0_0_30px_rgba(220,38,38,0.5)]",
       secondary:
-        "bg-dark-card dark:bg-dark-elevated text-white hover:bg-dark-elevated dark:hover:bg-dark-card focus:ring-dark-border border border-dark-border",
+        "bg-zinc-900 text-white hover:bg-zinc-800 focus:ring-zinc-700 border border-white/10",
       outline:
-        "border-2 border-white/20 text-white hover:bg-white/5 focus:ring-primary-500",
+        "border border-white/20 text-white hover:bg-white/5 focus:ring-primary-500 hover:border-primary-600/50",
       ghost:
-        "text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-dark-card focus:ring-gray-300",
+        "text-gray-400 hover:text-white hover:bg-zinc-800 focus:ring-zinc-600",
       gradient:
-        "bg-gradient-to-r from-primary-600 via-primary-500 to-accent-500 text-white hover:opacity-95 focus:ring-primary-500 shadow-lg hover:shadow-xl hover:shadow-primary-500/35 animate-gradient bg-[length:200%_200%]",
+        "bg-primary-600 text-white hover:bg-primary-700 focus:ring-primary-500 shadow-[0_0_30px_rgba(220,38,38,0.4)] hover:shadow-[0_0_40px_rgba(220,38,38,0.6)]",
     };
 
     const sizes = {
@@ -63,8 +63,8 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
         {...props}
       >
         {/* Ripple effect background */}
-        <span className="absolute inset-0 overflow-hidden rounded-xl">
-          <span className="absolute inset-0 rounded-xl bg-white/20 opacity-0 transition-opacity group-hover:opacity-100" />
+        <span className="absolute inset-0 overflow-hidden">
+          <span className="absolute inset-0 bg-white/10 opacity-0 transition-opacity group-hover:opacity-100" />
         </span>
 
         {/* Content */}
@@ -91,10 +91,12 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
               />
             </svg>
           ) : (
-            leftIcon
+            <>
+              {leftIcon && <span className="shrink-0">{leftIcon}</span>}
+              {children}
+              {rightIcon && <span className="shrink-0">{rightIcon}</span>}
+            </>
           )}
-          {children}
-          {!isLoading && rightIcon}
         </span>
       </motion.button>
     );

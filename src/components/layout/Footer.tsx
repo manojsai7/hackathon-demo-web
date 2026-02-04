@@ -1,7 +1,9 @@
 "use client";
 
+import { motion } from "framer-motion";
 import Link from "next/link";
-import { Github, Twitter, Instagram, Linkedin, Mail, Heart } from "lucide-react";
+import { Heart, Github, Twitter, Instagram, Linkedin, Mail } from "lucide-react";
+import { HACKATHON_CONFIG } from "@/lib/constants";
 
 const footerLinks = {
   pages: [
@@ -9,7 +11,7 @@ const footerLinks = {
     { label: "Schedule", href: "/schedule" },
     { label: "Prizes", href: "/prizes" },
     { label: "FAQ", href: "/faq" },
-    { label: "Contact", href: "/contact" },
+    { label: "Register", href: "/register" },
   ],
   legal: [
     { label: "Privacy Policy", href: "/privacy" },
@@ -19,29 +21,29 @@ const footerLinks = {
 };
 
 const socials = [
-  { icon: Twitter, href: "https://twitter.com/innohack", label: "Twitter" },
-  { icon: Instagram, href: "https://instagram.com/innohack", label: "Instagram" },
-  { icon: Linkedin, href: "https://linkedin.com/company/innohack", label: "LinkedIn" },
+  { icon: Twitter, href: HACKATHON_CONFIG.social.twitter, label: "Twitter" },
+  { icon: Instagram, href: HACKATHON_CONFIG.social.instagram, label: "Instagram" },
+  { icon: Linkedin, href: HACKATHON_CONFIG.social.linkedin, label: "LinkedIn" },
   { icon: Github, href: "https://github.com/innohack", label: "GitHub" },
 ];
 
 export default function Footer() {
   return (
-    <footer className="border-t border-neutral-800 bg-neutral-950">
+    <footer className="border-t border-white/10 bg-black">
       <div className="mx-auto max-w-6xl px-6 py-16">
         <div className="grid gap-12 md:grid-cols-4">
           {/* Brand */}
           <div className="md:col-span-2">
-            <Link href="/" className="inline-block font-heading text-2xl font-bold text-white mb-4">
-              <span className="text-rose-400">Inno</span>Hack
+            <Link href="/" className="mb-4 inline-block font-black text-2xl uppercase tracking-wider text-white">
+              <span className="text-red-600">Inno</span>Hack
             </Link>
-            <p className="text-neutral-400 text-sm max-w-md mb-6">
+            <p className="mb-6 max-w-md text-sm font-mono text-gray-400">
               36 hours of building, breaking, and shipping. Join 500+ hackers 
               for the most intense hackathon of the year.
             </p>
             <a
               href="mailto:hello@innohack.dev"
-              className="inline-flex items-center gap-2 text-sm text-neutral-400 hover:text-white transition-colors"
+              className="inline-flex items-center gap-2 text-sm font-mono text-gray-400 transition-colors hover:text-white"
             >
               <Mail className="w-4 h-4" />
               hello@innohack.dev
@@ -50,13 +52,13 @@ export default function Footer() {
 
           {/* Pages */}
           <div>
-            <h3 className="font-semibold text-white mb-4">Pages</h3>
+            <h3 className="mb-4 font-black uppercase tracking-wide text-white">Pages</h3>
             <ul className="space-y-3">
               {footerLinks.pages.map((link) => (
                 <li key={link.href}>
                   <Link
                     href={link.href}
-                    className="text-sm text-neutral-400 hover:text-white transition-colors"
+                    className="text-sm font-mono text-gray-400 transition-colors hover:text-white"
                   >
                     {link.label}
                   </Link>
@@ -67,13 +69,13 @@ export default function Footer() {
 
           {/* Legal */}
           <div>
-            <h3 className="font-semibold text-white mb-4">Legal</h3>
+            <h3 className="mb-4 font-black uppercase tracking-wide text-white">Legal</h3>
             <ul className="space-y-3">
               {footerLinks.legal.map((link) => (
                 <li key={link.href}>
                   <Link
                     href={link.href}
-                    className="text-sm text-neutral-400 hover:text-white transition-colors"
+                    className="text-sm font-mono text-gray-400 transition-colors hover:text-white"
                   >
                     {link.label}
                   </Link>
@@ -84,9 +86,14 @@ export default function Footer() {
         </div>
 
         {/* Bottom */}
-        <div className="mt-12 pt-8 border-t border-neutral-800 flex flex-col sm:flex-row items-center justify-between gap-4">
-          <p className="text-sm text-neutral-500 flex items-center gap-1">
-            Made with <Heart className="w-4 h-4 text-rose-500" /> in India
+        <motion.div
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          className="mt-12 flex flex-col items-center justify-between gap-4 border-t border-white/10 pt-8 sm:flex-row"
+        >
+          <p className="flex items-center gap-1 text-sm font-mono text-gray-500">
+            Made with <Heart className="h-4 w-4 text-red-600" /> in India
           </p>
 
           <div className="flex items-center gap-4">
@@ -96,18 +103,18 @@ export default function Footer() {
                 href={social.href}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-9 h-9 flex items-center justify-center rounded-lg text-neutral-500 hover:text-white hover:bg-neutral-800 transition-colors"
+                className="flex h-9 w-9 items-center justify-center text-gray-500 transition-colors hover:bg-zinc-800 hover:text-white"
                 aria-label={social.label}
               >
-                <social.icon className="w-4 h-4" />
+                <social.icon className="h-5 w-5" />
               </a>
             ))}
           </div>
 
-          <p className="text-sm text-neutral-500">
+          <p className="text-sm font-mono text-gray-500">
             © 2026 InnoHack. All rights reserved.
           </p>
-        </div>
+        </motion.div>
       </div>
     </footer>
   );

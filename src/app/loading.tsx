@@ -1,27 +1,22 @@
 export default function Loading() {
   return (
-    <div className="flex min-h-screen flex-col items-center justify-center bg-dark-base">
+    <div className="flex min-h-screen flex-col items-center justify-center bg-black">
       <div className="text-center">
-        {/* Animated logo/spinner */}
-        <div className="mb-8 inline-flex h-20 w-20 items-center justify-center">
-          <div className="relative">
-            <div className="h-16 w-16 animate-spin rounded-full border-4 border-dark-border border-t-primary-500" />
-            <div className="absolute inset-0 flex items-center justify-center">
-              <span className="text-2xl">🚀</span>
-            </div>
-          </div>
+        {/* Logo */}
+        <div className="mb-8 inline-flex h-20 w-20 items-center justify-center border-2 border-red-600 bg-black">
+          <span className="text-3xl font-black text-red-600">IH</span>
+        </div>
+
+        {/* Loading bar */}
+        <div className="w-48 h-1 bg-zinc-800 overflow-hidden mb-6">
+          <div className="h-full w-1/2 bg-red-600 animate-pulse" />
         </div>
 
         {/* Loading text */}
         <div className="space-y-2">
-          <h2 className="text-xl font-semibold text-white">Loading...</h2>
-          <p className="text-sm text-gray-400">Brewing some innovation ☕</p>
+          <h2 className="text-xl font-black uppercase tracking-wider text-white">Loading</h2>
+          <p className="text-sm font-mono text-gray-600">Compiling genius ideas...</p>
         </div>
-      </div>
-
-      {/* Fun loading messages */}
-      <div className="mt-8 animate-pulse text-center text-xs text-gray-600">
-        <p>Compiling genius ideas...</p>
       </div>
     </div>
   );

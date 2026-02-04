@@ -55,22 +55,22 @@ export default function RegisterPage() {
     return (
       <>
         <Navbar />
-        <main className="min-h-screen pt-20 flex items-center justify-center px-6">
+        <main className="min-h-screen pt-20 flex items-center justify-center px-6 bg-black">
           <motion.div
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
             className="text-center max-w-md"
           >
-            <div className="w-20 h-20 rounded-full bg-green-500/20 flex items-center justify-center mx-auto mb-6">
-              <Check className="w-10 h-10 text-green-400" />
+            <div className="w-20 h-20 bg-green-600 flex items-center justify-center mx-auto mb-6">
+              <Check className="w-10 h-10 text-white" />
             </div>
-            <h1 className="text-3xl font-bold text-white mb-4">You&apos;re in!</h1>
-            <p className="text-neutral-400 mb-8">
+            <h1 className="text-3xl font-black uppercase tracking-wider text-white mb-4">You&apos;re In!</h1>
+            <p className="text-gray-500 font-mono mb-8">
               Check your email for confirmation and next steps. See you at InnoHack!
             </p>
             <a
               href="/"
-              className="inline-flex items-center gap-2 px-6 py-3 bg-neutral-800 text-white font-medium rounded-xl hover:bg-neutral-700 transition-colors"
+              className="inline-flex items-center gap-2 px-6 py-3 bg-red-600 text-white font-bold uppercase tracking-wide hover:bg-red-700 transition-colors"
             >
               Back to Home
             </a>
@@ -84,10 +84,26 @@ export default function RegisterPage() {
   return (
     <>
       <Navbar />
-      <main className="min-h-screen pt-20">
+      <main className="min-h-screen pt-20 bg-black">
         {/* Hero */}
         <section className="relative overflow-hidden py-16 lg:py-24">
-          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-green-950/20 via-neutral-950 to-neutral-950" />
+          <div className="absolute inset-0 bg-black" />
+          {/* Grid pattern */}
+          <div
+            className="absolute inset-0 opacity-20"
+            style={{
+              backgroundImage: `linear-gradient(rgba(220, 38, 38, 0.15) 1px, transparent 1px),
+                               linear-gradient(90deg, rgba(220, 38, 38, 0.15) 1px, transparent 1px)`,
+              backgroundSize: "60px 60px",
+            }}
+          />
+          {/* Red glow */}
+          <div
+            className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px]"
+            style={{
+              background: "radial-gradient(ellipse, rgba(220, 38, 38, 0.15) 0%, transparent 70%)",
+            }}
+          />
           
           <div className="relative z-10 mx-auto max-w-5xl px-6">
             <motion.div
@@ -96,7 +112,7 @@ export default function RegisterPage() {
               transition={{ duration: 0.6 }}
               className="text-center mb-12"
             >
-              <span className="inline-block mb-4 text-green-400 font-mono text-sm tracking-wider uppercase">
+              <span className="inline-block mb-4 text-red-500 font-mono text-sm tracking-widest uppercase border border-red-600/30 bg-red-600/10 px-4 py-2">
                 Registration
               </span>
               <h1 className="text-4xl md:text-5xl font-bold text-white mb-6">

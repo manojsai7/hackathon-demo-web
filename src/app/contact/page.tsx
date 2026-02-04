@@ -57,10 +57,26 @@ export default function ContactPage() {
   return (
     <>
       <Navbar />
-      <main className="min-h-screen pt-20">
+      <main className="min-h-screen pt-20 bg-black">
         {/* Hero */}
         <section className="relative overflow-hidden py-20 lg:py-28">
-          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-blue-950/30 via-neutral-950 to-neutral-950" />
+          <div className="absolute inset-0 bg-black" />
+          {/* Grid pattern */}
+          <div
+            className="absolute inset-0 opacity-20"
+            style={{
+              backgroundImage: `linear-gradient(rgba(220, 38, 38, 0.15) 1px, transparent 1px),
+                               linear-gradient(90deg, rgba(220, 38, 38, 0.15) 1px, transparent 1px)`,
+              backgroundSize: "60px 60px",
+            }}
+          />
+          {/* Red glow */}
+          <div
+            className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px]"
+            style={{
+              background: "radial-gradient(ellipse, rgba(220, 38, 38, 0.15) 0%, transparent 70%)",
+            }}
+          />
           
           <div className="relative z-10 mx-auto max-w-5xl px-6 text-center">
             <motion.div
@@ -68,13 +84,13 @@ export default function ContactPage() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
             >
-              <span className="inline-block mb-4 text-blue-400 font-mono text-sm tracking-wider uppercase">
+              <span className="inline-block mb-4 text-red-500 font-mono text-sm tracking-widest uppercase border border-red-600/30 bg-red-600/10 px-4 py-2">
                 Contact
               </span>
-              <h1 className="text-4xl md:text-6xl font-bold text-white mb-6">
-                Let&apos;s talk
+              <h1 className="text-4xl md:text-6xl lg:text-7xl font-black uppercase tracking-wider text-white mb-6">
+                Let&apos;s <span className="text-red-500">Talk</span>
               </h1>
-              <p className="text-neutral-400 text-lg max-w-xl mx-auto">
+              <p className="text-gray-500 font-mono text-lg max-w-xl mx-auto">
                 Questions, partnerships, or just want to say hi? We&apos;re all ears.
               </p>
             </motion.div>
@@ -82,7 +98,7 @@ export default function ContactPage() {
         </section>
 
         {/* Contact Section */}
-        <section className="py-16 lg:py-24">
+        <section className="py-16 lg:py-24 bg-zinc-950">
           <div className="mx-auto max-w-6xl px-6">
             <div className="grid lg:grid-cols-2 gap-12 lg:gap-16">
               {/* Contact Info */}
@@ -91,7 +107,7 @@ export default function ContactPage() {
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
               >
-                <h2 className="text-2xl font-bold text-white mb-8">Get in touch</h2>
+                <h2 className="text-2xl font-black uppercase tracking-wider text-white mb-8">Get In Touch</h2>
                 
                 <div className="space-y-6 mb-12">
                   {contactInfo.map((item) => (

@@ -87,10 +87,26 @@ export default function PrizesPage() {
   return (
     <>
       <Navbar />
-      <main className="min-h-screen pt-20">
+      <main className="min-h-screen pt-20 bg-black">
         {/* Hero */}
         <section className="relative overflow-hidden py-20 lg:py-28">
-          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-amber-950/30 via-neutral-950 to-neutral-950" />
+          <div className="absolute inset-0 bg-black" />
+          {/* Grid pattern */}
+          <div
+            className="absolute inset-0 opacity-20"
+            style={{
+              backgroundImage: `linear-gradient(rgba(220, 38, 38, 0.15) 1px, transparent 1px),
+                               linear-gradient(90deg, rgba(220, 38, 38, 0.15) 1px, transparent 1px)`,
+              backgroundSize: "60px 60px",
+            }}
+          />
+          {/* Red glow */}
+          <div
+            className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px]"
+            style={{
+              background: "radial-gradient(ellipse, rgba(220, 38, 38, 0.15) 0%, transparent 70%)",
+            }}
+          />
           
           <div className="relative z-10 mx-auto max-w-5xl px-6 text-center">
             <motion.div
@@ -98,13 +114,13 @@ export default function PrizesPage() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
             >
-              <span className="inline-block mb-4 text-amber-400 font-mono text-sm tracking-wider uppercase">
+              <span className="inline-block mb-4 text-red-500 font-mono text-sm tracking-widest uppercase border border-red-600/30 bg-red-600/10 px-4 py-2">
                 Prizes
               </span>
-              <h1 className="text-4xl md:text-6xl font-bold text-white mb-6">
-                ₹5 Lakhs+ up for grabs
+              <h1 className="text-4xl md:text-6xl lg:text-7xl font-black uppercase tracking-wider text-white mb-6">
+                <span className="text-red-500">₹5 Lakhs+</span> Up For Grabs
               </h1>
-              <p className="text-neutral-400 text-lg max-w-xl mx-auto">
+              <p className="text-gray-500 font-mono text-lg max-w-xl mx-auto">
                 We&apos;re not here to hand out participation trophies. Build something 
                 great, and you&apos;ll be rewarded.
               </p>
@@ -113,7 +129,7 @@ export default function PrizesPage() {
         </section>
 
         {/* Main Prizes */}
-        <section className="py-16 lg:py-24">
+        <section className="py-16 lg:py-24 bg-zinc-950">
           <div className="mx-auto max-w-6xl px-6">
             <div className="grid md:grid-cols-3 gap-6">
               {mainPrizes.map((prize, index) => (
@@ -123,22 +139,22 @@ export default function PrizesPage() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ delay: index * 0.15 }}
-                  className={`relative p-8 rounded-2xl ${prize.bgColor} border ${prize.borderColor} ${
-                    index === 0 ? "md:-mt-4 md:mb-4" : ""
+                  className={`relative p-8 bg-zinc-900/50 border border-white/10 hover:border-red-600/50 transition-all ${
+                    index === 0 ? "md:-mt-4 md:mb-4 border-amber-500/50" : ""
                   }`}
                 >
-                  <div className={`inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-gradient-to-br ${prize.color} mb-6`}>
+                  <div className={`inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br ${prize.color} mb-6`}>
                     <Trophy className="w-8 h-8 text-white" />
                   </div>
-                  <div className="text-sm text-neutral-400 mb-1">{prize.place} Place</div>
-                  <h3 className="text-2xl font-bold text-white mb-2">{prize.title}</h3>
-                  <div className={`text-4xl font-bold bg-gradient-to-r ${prize.color} bg-clip-text text-transparent mb-6`}>
+                  <div className="text-sm text-gray-500 font-mono uppercase tracking-wider mb-1">{prize.place} Place</div>
+                  <h3 className="text-2xl font-black uppercase tracking-wide text-white mb-2">{prize.title}</h3>
+                  <div className={`text-4xl font-black bg-gradient-to-r ${prize.color} bg-clip-text text-transparent mb-6`}>
                     {prize.prize}
                   </div>
                   <ul className="space-y-2">
                     {prize.perks.map((perk) => (
-                      <li key={perk} className="flex items-center gap-2 text-neutral-400 text-sm">
-                        <Star className="w-4 h-4 text-amber-500" />
+                      <li key={perk} className="flex items-center gap-2 text-gray-500 font-mono text-sm">
+                        <Star className="w-4 h-4 text-red-500" />
                         {perk}
                       </li>
                     ))}

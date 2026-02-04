@@ -41,10 +41,26 @@ export default function SchedulePage() {
   return (
     <>
       <Navbar />
-      <main className="min-h-screen pt-20">
+      <main className="min-h-screen pt-20 bg-black">
         {/* Hero */}
         <section className="relative overflow-hidden py-20 lg:py-28">
-          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-orange-950/30 via-neutral-950 to-neutral-950" />
+          <div className="absolute inset-0 bg-black" />
+          {/* Grid pattern */}
+          <div
+            className="absolute inset-0 opacity-20"
+            style={{
+              backgroundImage: `linear-gradient(rgba(220, 38, 38, 0.15) 1px, transparent 1px),
+                               linear-gradient(90deg, rgba(220, 38, 38, 0.15) 1px, transparent 1px)`,
+              backgroundSize: "60px 60px",
+            }}
+          />
+          {/* Red glow */}
+          <div
+            className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px]"
+            style={{
+              background: "radial-gradient(ellipse, rgba(220, 38, 38, 0.15) 0%, transparent 70%)",
+            }}
+          />
           
           <div className="relative z-10 mx-auto max-w-5xl px-6 text-center">
             <motion.div
@@ -52,13 +68,13 @@ export default function SchedulePage() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
             >
-              <span className="inline-block mb-4 text-orange-400 font-mono text-sm tracking-wider uppercase">
+              <span className="inline-block mb-4 text-red-500 font-mono text-sm tracking-widest uppercase border border-red-600/30 bg-red-600/10 px-4 py-2">
                 Schedule
               </span>
-              <h1 className="text-4xl md:text-6xl font-bold text-white mb-6">
-                36 hours. Every minute counts.
+              <h1 className="text-4xl md:text-6xl lg:text-7xl font-black uppercase tracking-wider text-white mb-6">
+                36 Hours. <span className="text-red-500">Every Minute</span> Counts.
               </h1>
-              <p className="text-neutral-400 text-lg max-w-xl mx-auto">
+              <p className="text-gray-500 font-mono text-lg max-w-xl mx-auto">
                 Here&apos;s the game plan. Times are approximate—we&apos;re hackers, not accountants.
               </p>
             </motion.div>
@@ -66,7 +82,7 @@ export default function SchedulePage() {
         </section>
 
         {/* Timeline */}
-        <section className="py-16 lg:py-24">
+        <section className="py-16 lg:py-24 bg-zinc-950">
           <div className="mx-auto max-w-4xl px-6">
             {/* Day 1 */}
             <motion.div
@@ -76,12 +92,12 @@ export default function SchedulePage() {
               className="mb-16"
             >
               <div className="flex items-center gap-4 mb-8">
-                <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-rose-500 to-orange-500 flex items-center justify-center">
+                <div className="w-14 h-14 bg-red-600 flex items-center justify-center">
                   <Calendar className="w-7 h-7 text-white" />
                 </div>
                 <div>
-                  <h2 className="text-2xl font-bold text-white">Day 1</h2>
-                  <p className="text-neutral-400">{schedule.day1.date}</p>
+                  <h2 className="text-2xl font-black uppercase tracking-wide text-white">Day 1</h2>
+                  <p className="text-gray-500 font-mono">{schedule.day1.date}</p>
                 </div>
               </div>
 
@@ -93,17 +109,17 @@ export default function SchedulePage() {
                     whileInView={{ opacity: 1, x: 0 }}
                     viewport={{ once: true }}
                     transition={{ delay: index * 0.05 }}
-                    className="flex gap-4 p-4 rounded-xl bg-neutral-900/50 border border-neutral-800 hover:border-neutral-700 transition-colors group"
+                    className="flex gap-4 p-4 bg-zinc-900/50 border border-white/10 hover:border-red-600/50 transition-colors group"
                   >
                     <div className="flex-shrink-0 w-16 text-right">
-                      <span className="font-mono text-orange-400 font-semibold">{event.time}</span>
+                      <span className="font-mono text-red-500 font-bold">{event.time}</span>
                     </div>
-                    <div className="flex-shrink-0 w-10 h-10 rounded-lg bg-neutral-800 flex items-center justify-center text-neutral-400 group-hover:bg-neutral-700 group-hover:text-white transition-colors">
+                    <div className="flex-shrink-0 w-10 h-10 bg-zinc-800 border border-white/10 flex items-center justify-center text-gray-500 group-hover:bg-red-600 group-hover:border-red-600 group-hover:text-white transition-colors">
                       <event.icon className="w-5 h-5" />
                     </div>
                     <div className="flex-1">
-                      <h3 className="text-white font-medium">{event.title}</h3>
-                      <p className="text-neutral-500 text-sm">{event.desc}</p>
+                      <h3 className="text-white font-bold uppercase tracking-wide">{event.title}</h3>
+                      <p className="text-gray-500 font-mono text-sm">{event.desc}</p>
                     </div>
                   </motion.div>
                 ))}
@@ -117,12 +133,12 @@ export default function SchedulePage() {
               viewport={{ once: true }}
             >
               <div className="flex items-center gap-4 mb-8">
-                <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-orange-500 to-amber-500 flex items-center justify-center">
+                <div className="w-14 h-14 bg-orange-600 flex items-center justify-center">
                   <Calendar className="w-7 h-7 text-white" />
                 </div>
                 <div>
-                  <h2 className="text-2xl font-bold text-white">Day 2</h2>
-                  <p className="text-neutral-400">{schedule.day2.date}</p>
+                  <h2 className="text-2xl font-black uppercase tracking-wide text-white">Day 2</h2>
+                  <p className="text-gray-500 font-mono">{schedule.day2.date}</p>
                 </div>
               </div>
 
@@ -134,17 +150,17 @@ export default function SchedulePage() {
                     whileInView={{ opacity: 1, x: 0 }}
                     viewport={{ once: true }}
                     transition={{ delay: index * 0.05 }}
-                    className="flex gap-4 p-4 rounded-xl bg-neutral-900/50 border border-neutral-800 hover:border-neutral-700 transition-colors group"
+                    className="flex gap-4 p-4 bg-zinc-900/50 border border-white/10 hover:border-orange-600/50 transition-colors group"
                   >
                     <div className="flex-shrink-0 w-16 text-right">
-                      <span className="font-mono text-amber-400 font-semibold">{event.time}</span>
+                      <span className="font-mono text-orange-500 font-bold">{event.time}</span>
                     </div>
-                    <div className="flex-shrink-0 w-10 h-10 rounded-lg bg-neutral-800 flex items-center justify-center text-neutral-400 group-hover:bg-neutral-700 group-hover:text-white transition-colors">
+                    <div className="flex-shrink-0 w-10 h-10 bg-zinc-800 border border-white/10 flex items-center justify-center text-gray-500 group-hover:bg-orange-600 group-hover:border-orange-600 group-hover:text-white transition-colors">
                       <event.icon className="w-5 h-5" />
                     </div>
                     <div className="flex-1">
-                      <h3 className="text-white font-medium">{event.title}</h3>
-                      <p className="text-neutral-500 text-sm">{event.desc}</p>
+                      <h3 className="text-white font-bold uppercase tracking-wide">{event.title}</h3>
+                      <p className="text-gray-500 font-mono text-sm">{event.desc}</p>
                     </div>
                   </motion.div>
                 ))}
@@ -154,15 +170,15 @@ export default function SchedulePage() {
         </section>
 
         {/* CTA */}
-        <section className="py-16 border-t border-neutral-800">
+        <section className="py-16 bg-black border-t border-white/10">
           <div className="mx-auto max-w-3xl px-6 text-center">
-            <h2 className="text-2xl font-bold text-white mb-4">Ready to join?</h2>
-            <p className="text-neutral-400 mb-8">
+            <h2 className="text-2xl font-black uppercase tracking-wider text-white mb-4">Ready to Join?</h2>
+            <p className="text-gray-500 font-mono mb-8">
               Registration closes when we hit capacity. Don&apos;t wait.
             </p>
             <a
               href="/register"
-              className="inline-flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-rose-500 to-orange-500 text-white font-semibold rounded-xl hover:opacity-90 transition-opacity"
+              className="inline-flex items-center gap-2 px-8 py-4 bg-red-600 text-white font-bold uppercase tracking-wide hover:bg-red-700 transition-all hover:shadow-[0_0_40px_rgba(220,38,38,0.5)]"
             >
               Register Now
             </a>

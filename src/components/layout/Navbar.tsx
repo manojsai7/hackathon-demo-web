@@ -1,13 +1,14 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X } from "lucide-react";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
-import { cn } from "@/lib/utils";
+import { motion, AnimatePresence } from "framer-motion";
+import { Menu, X, Zap } from "lucide-react";
+import Button from "@/components/ui/Button";
+import { HACKATHON_CONFIG } from "@/lib/constants";
 
 const navLinks = [
+  { href: "/", label: "Home" },
   { href: "/about", label: "About" },
   { href: "/schedule", label: "Schedule" },
   { href: "/prizes", label: "Prizes" },
@@ -16,9 +17,8 @@ const navLinks = [
 ];
 
 export default function Navbar() {
-  const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
-  const pathname = usePathname();
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -31,130 +31,108 @@ export default function Navbar() {
 
   return (
     <>
-      <nav
-        className={cn(
-          "fixed left-0 right-0 top-0 z-50 transition-all duration-300",
+      <motion.header
+        initial={{ y: -100 }}
+        animate={{ y: 0 }}
+        transition={{ duration: 0.5 }}
+        className={`fixed left-0 right-0 top-0 z-50 transition-all duration-300 ${
           isScrolled
-            ? "border-b border-neutral-800 bg-neutral-950/90 backdrop-blur-md"
+            ? "bg-black/90 backdrop-blur-xl border-b border-white/10"
             : "bg-transparent"
-        )}
+        }`}
       >
-        <div className="mx-auto max-w-6xl px-6">
-          <div className="flex h-16 items-center justify-between">
-            {/* Logo */}
-            <Link
-              href="/"
-              className="flex items-center gap-2 font-heading text-xl font-bold text-white hover:opacity-80 transition-opacity"
-            >
-              <span className="text-rose-400">Inno</span>
-              <span>Hack</span>
-            </Link>
-
-            {/* Desktop Navigation */}
-            <div className="hidden items-center gap-1 md:flex">
-              {navLinks.map((link) => (
-                <Link
-                  key={link.href}
-                  href={link.href}
-                  className={cn(
-                    "px-4 py-2 text-sm font-medium transition-colors rounded-lg",
-                    pathname === link.href
-                      ? "text-white bg-neutral-800"
-                      : "text-neutral-400 hover:text-white hover:bg-neutral-800/50"
-                  )}
-                >
-                  {link.label}
-                </Link>
-              ))}
+        <nav className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
+          {/* Logo */}
+          <Link href="/" className="flex items-center gap-2 group">
+            <div className="relative">
+              <div className="flex h-10 w-10 items-center justify-center bg-primary-600">
+                <Zap className="h-5 w-5 text-white" />
+              </div>
+              <div className="absolute inset-0 bg-primary-600 blur-lg opacity-50 group-hover:opacity-75 transition-opacity" />
             </div>
+            <span className="text-xl font-black uppercase tracking-wider text-white">
+              {HACKATHON_CONFIG.name}
+            </span>
+          </Link>
 
-            {/* Right side */}
-            <div className="flex items-center gap-4">
+          {/* Desktop Navigation */}
+          <div className="hidden items-center gap-1 md:flex">
+            {navLinks.map((link) => (
               <Link
-                href="/register"
-                className="hidden sm:inline-flex px-5 py-2 text-sm font-medium bg-rose-500 text-white rounded-lg hover:bg-rose-600 transition-colors"
+                key={link.href}
+                href={link.href}
+                className="px-4 py-2 text-sm font-mono uppercase tracking-wider text-gray-400 transition-colors hover:text-white"
               >
-                Register
+                {link.label}
               </Link>
-
-              {/* Mobile menu button */}
-              <button
-                onClick={() => setIsOpen(!isOpen)}
-                className="flex h-10 w-10 items-center justify-center rounded-lg text-neutral-400 hover:text-white hover:bg-neutral-800 md:hidden transition-colors"
-              >
-                {isOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
-              </button>
-            </div>
+            ))}
           </div>
-        </div>
-      </nav>
+
+          {/* Desktop CTA */}
+          <div className="hidden md:block">
+            <Link href="/register">
+              <Button variant="primary" size="sm">
+                Register Now
+              </Button>
+            </Link>
+          </div>
+
+          {/* Mobile Menu Button */}
+          <button
+            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+            className="flex h-10 w-10 items-center justify-center text-white md:hidden"
+            aria-label="Toggle menu"
+          >
+            {isMobileMenuOpen ? (
+              <X className="h-6 w-6" />
+            ) : (
+              <Menu className="h-6 w-6" />
+            )}
+          </button>
+        </nav>
+      </motion.header>
 
       {/* Mobile Menu */}
       <AnimatePresence>
-        {isOpen && (
-          <>
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              onClick={() => setIsOpen(false)}
-              className="fixed inset-0 z-40 bg-black/60 backdrop-blur-sm md:hidden"
-            />
-
-            <motion.div
-              initial={{ x: "100%" }}
-              animate={{ x: 0 }}
-              exit={{ x: "100%" }}
-              transition={{ type: "spring", damping: 25, stiffness: 300 }}
-              className="fixed bottom-0 right-0 top-0 z-50 w-72 bg-neutral-900 border-l border-neutral-800 p-6 md:hidden"
-            >
-              <div className="flex flex-col h-full">
-                <div className="flex items-center justify-between mb-8">
-                  <span className="font-heading text-lg font-semibold text-white">Menu</span>
-                  <button
-                    onClick={() => setIsOpen(false)}
-                    className="h-10 w-10 flex items-center justify-center rounded-lg text-neutral-400 hover:text-white hover:bg-neutral-800"
-                  >
-                    <X className="h-5 w-5" />
-                  </button>
-                </div>
-
-                <div className="flex flex-col gap-1">
-                  {navLinks.map((link, index) => (
-                    <motion.div
-                      key={link.href}
-                      initial={{ opacity: 0, x: 20 }}
-                      animate={{ opacity: 1, x: 0 }}
-                      transition={{ delay: index * 0.05 }}
-                    >
-                      <Link
-                        href={link.href}
-                        onClick={() => setIsOpen(false)}
-                        className={cn(
-                          "block px-4 py-3 rounded-lg text-base font-medium transition-colors",
-                          pathname === link.href
-                            ? "text-white bg-neutral-800"
-                            : "text-neutral-400 hover:text-white hover:bg-neutral-800/50"
-                        )}
-                      >
-                        {link.label}
-                      </Link>
-                    </motion.div>
-                  ))}
-                </div>
-
-                <div className="mt-auto pt-6 border-t border-neutral-800">
+        {isMobileMenuOpen && (
+          <motion.div
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            transition={{ duration: 0.2 }}
+            className="fixed inset-x-0 top-16 z-40 border-b border-white/10 bg-black/95 backdrop-blur-xl md:hidden"
+          >
+            <div className="flex flex-col p-4">
+              {navLinks.map((link, index) => (
+                <motion.div
+                  key={link.href}
+                  initial={{ opacity: 0, x: -20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: index * 0.05 }}
+                >
                   <Link
-                    href="/register"
-                    onClick={() => setIsOpen(false)}
-                    className="block w-full text-center px-6 py-3 bg-rose-500 text-white font-medium rounded-lg hover:bg-rose-600 transition-colors"
+                    href={link.href}
+                    onClick={() => setIsMobileMenuOpen(false)}
+                    className="block py-3 text-lg font-mono uppercase tracking-wider text-gray-400 transition-colors hover:text-white"
                   >
-                    Register Now
+                    {link.label}
                   </Link>
-                </div>
-              </div>
-            </motion.div>
-          </>
+                </motion.div>
+              ))}
+              <motion.div
+                initial={{ opacity: 0, x: -20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ delay: navLinks.length * 0.05 }}
+                className="mt-4 pt-4 border-t border-white/10"
+              >
+                <Link href="/register" onClick={() => setIsMobileMenuOpen(false)}>
+                  <Button variant="primary" size="lg" className="w-full">
+                    Register Now
+                  </Button>
+                </Link>
+              </motion.div>
+            </div>
+          </motion.div>
         )}
       </AnimatePresence>
     </>

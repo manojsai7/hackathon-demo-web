@@ -3,88 +3,63 @@
 import { motion } from "framer-motion";
 import Link from "next/link";
 import { Home, ArrowLeft, Search, Coffee } from "lucide-react";
-import Button from "@/components/ui/Button";
 
 export default function NotFound() {
   return (
-    <div className="flex min-h-screen flex-col items-center justify-center bg-dark-base px-4">
-      {/* Animated background blobs */}
+    <div className="flex min-h-screen flex-col items-center justify-center bg-black px-4">
+      {/* Background */}
       <div className="absolute inset-0 overflow-hidden">
-        <motion.div
-          animate={{
-            x: [0, 30, -20, 0],
-            y: [0, -50, 20, 0],
-            scale: [1, 1.1, 0.9, 1],
+        <div
+          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px]"
+          style={{
+            background: "radial-gradient(circle, rgba(220, 38, 38, 0.1) 0%, transparent 60%)",
           }}
-          transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-          className="absolute left-1/4 top-1/4 h-96 w-96 rounded-full bg-primary-500/10 blur-3xl"
         />
-        <motion.div
-          animate={{
-            x: [0, -30, 20, 0],
-            y: [0, 30, -30, 0],
-            scale: [1, 0.9, 1.1, 1],
+        {/* Grid pattern */}
+        <div
+          className="absolute inset-0 opacity-10"
+          style={{
+            backgroundImage: `linear-gradient(rgba(220, 38, 38, 0.15) 1px, transparent 1px),
+                             linear-gradient(90deg, rgba(220, 38, 38, 0.15) 1px, transparent 1px)`,
+            backgroundSize: "60px 60px",
           }}
-          transition={{ duration: 25, repeat: Infinity, ease: "linear" }}
-          className="absolute right-1/4 bottom-1/4 h-96 w-96 rounded-full bg-accent-500/10 blur-3xl"
         />
       </div>
 
       <div className="relative z-10 text-center">
-        {/* 404 animation */}
+        {/* 404 */}
         <motion.div
           initial={{ opacity: 0, scale: 0.5 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.5 }}
           className="mb-8"
         >
-          <div className="relative">
-            <motion.span
-              animate={{ y: [0, -10, 0] }}
+          <div className="flex items-center justify-center gap-2">
+            <span className="text-9xl font-black text-white md:text-[12rem]">4</span>
+            <motion.div
+              animate={{ scale: [1, 1.1, 1] }}
               transition={{ duration: 2, repeat: Infinity }}
-              className="block text-9xl font-bold text-white md:text-[12rem]"
+              className="w-24 h-24 md:w-32 md:h-32 border-4 border-red-600 flex items-center justify-center"
             >
-              4
-            </motion.span>
-            <motion.span
-              animate={{ rotate: [0, 10, -10, 0] }}
-              transition={{ duration: 2, repeat: Infinity }}
-              className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 text-6xl"
-            >
-              🔍
-            </motion.span>
-          </div>
-          <div className="flex items-center justify-center gap-4">
-            <motion.span
-              animate={{ y: [0, -10, 0] }}
-              transition={{ duration: 2, repeat: Infinity, delay: 0.2 }}
-              className="text-9xl font-bold text-white md:text-[12rem]"
-            >
-              0
-            </motion.span>
-            <motion.span
-              animate={{ y: [0, -10, 0] }}
-              transition={{ duration: 2, repeat: Infinity, delay: 0.4 }}
-              className="text-9xl font-bold text-white md:text-[12rem]"
-            >
-              4
-            </motion.span>
+              <span className="text-5xl md:text-6xl font-black text-red-600">IH</span>
+            </motion.div>
+            <span className="text-9xl font-black text-white md:text-[12rem]">4</span>
           </div>
         </motion.div>
 
-        {/* Fun message */}
+        {/* Message */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.3 }}
           className="mb-8"
         >
-          <h1 className="mb-4 text-2xl font-bold text-white md:text-3xl">
-            Oops! This page pulled an all-nighter and crashed 💤
+          <h1 className="mb-4 text-2xl font-black uppercase tracking-wider text-white md:text-3xl">
+            Page <span className="text-red-500">Not Found</span>
           </h1>
-          <p className="mx-auto max-w-md text-gray-400">
+          <p className="mx-auto max-w-md text-gray-500 font-mono">
             Looks like this page is still being hacked together. Maybe it&apos;s
-            grabbing some coffee? Either way, let&apos;s get you back on track!
+            grabbing some coffee? Let&apos;s get you back on track!
           </p>
         </motion.div>
 
@@ -93,14 +68,14 @@ export default function NotFound() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.4 }}
-          className="mb-8 flex items-center justify-center gap-6 text-sm text-gray-500"
+          className="mb-8 flex items-center justify-center gap-6 text-sm text-gray-600 font-mono"
         >
           <div className="flex items-center gap-2">
-            <Coffee className="h-4 w-4" />
+            <Coffee className="h-4 w-4 text-red-500" />
             <span>3,247 coffees consumed</span>
           </div>
           <div className="flex items-center gap-2">
-            <Search className="h-4 w-4" />
+            <Search className="h-4 w-4 text-red-500" />
             <span>Page still searching itself</span>
           </div>
         </motion.div>
@@ -112,19 +87,20 @@ export default function NotFound() {
           transition={{ delay: 0.5 }}
           className="flex flex-col items-center justify-center gap-4 sm:flex-row"
         >
-          <Link href="/">
-            <Button variant="gradient" size="lg" leftIcon={<Home className="h-5 w-5" />}>
-              Back to Home
-            </Button>
-          </Link>
-          <Button
-            variant="outline"
-            size="lg"
-            leftIcon={<ArrowLeft className="h-5 w-5" />}
-            onClick={() => window.history.back()}
+          <Link
+            href="/"
+            className="inline-flex items-center gap-2 px-8 py-4 bg-red-600 text-white font-bold uppercase tracking-wide hover:bg-red-700 transition-all hover:shadow-[0_0_40px_rgba(220,38,38,0.5)]"
           >
+            <Home className="h-5 w-5" />
+            Back to Home
+          </Link>
+          <button
+            onClick={() => window.history.back()}
+            className="inline-flex items-center gap-2 px-8 py-4 border border-white/20 text-white font-bold uppercase tracking-wide hover:bg-white/5 transition-colors"
+          >
+            <ArrowLeft className="h-5 w-5" />
             Go Back
-          </Button>
+          </button>
         </motion.div>
 
         {/* Easter egg hint */}
@@ -132,7 +108,7 @@ export default function NotFound() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 2 }}
-          className="mt-12 text-xs text-gray-600"
+          className="mt-12 text-xs font-mono text-gray-700"
         >
           Pro tip: The real hackathon is the friends we made along the way 🚀
         </motion.p>
