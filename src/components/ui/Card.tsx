@@ -5,7 +5,7 @@ import { cn } from "@/lib/utils";
 import { motion, HTMLMotionProps } from "framer-motion";
 
 interface CardProps extends Omit<HTMLMotionProps<"div">, "ref"> {
-  variant?: "default" | "terminal" | "outlined" | "glow" | "glass";
+  variant?: "default" | "terminal" | "outlined" | "glow" | "glass" | "gradient";
   hover?: "none" | "lift" | "glow" | "border";
   padding?: "none" | "sm" | "md" | "lg";
 }
@@ -35,6 +35,8 @@ const Card = forwardRef<HTMLDivElement, CardProps>(
         "bg-hacker-card border border-terminal-green/30 shadow-glow-green",
       glass:
         "bg-white/5 border border-white/10 backdrop-blur-md",
+      gradient:
+        "bg-gradient-to-br from-terminal-green/10 via-cyan-500/10 to-terminal-green/5 border border-terminal-green/20",
     };
 
     const hoverEffects = {

@@ -7,7 +7,7 @@ import { motion, MotionProps } from "framer-motion";
 type MotionButtonProps = MotionProps & React.ComponentPropsWithoutRef<"button">;
 
 interface ButtonProps extends Omit<MotionButtonProps, "children"> {
-  variant?: "primary" | "secondary" | "outline" | "ghost" | "danger";
+  variant?: "primary" | "secondary" | "outline" | "ghost" | "danger" | "gradient";
   size?: "sm" | "md" | "lg" | "xl";
   isLoading?: boolean;
   leftIcon?: ReactNode;
@@ -44,6 +44,8 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
         "text-gray-400 hover:text-terminal-green hover:bg-terminal-green/5 focus:ring-terminal-green/30",
       danger:
         "bg-terminal-red text-white hover:bg-terminal-red/90 focus:ring-terminal-red/50 shadow-glow-red",
+      gradient:
+        "bg-gradient-to-r from-terminal-green via-cyan-400 to-terminal-green text-black hover:brightness-110 focus:ring-cyan-300/50 shadow-glow-green",
     };
 
     const sizes = {
